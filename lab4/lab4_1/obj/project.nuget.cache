@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "Btf0YfU83MjhcuVp3v1siSjsOB2UhIUpOXomcsZo7WeF4Rt2PvvcywA1p/3epIYCcL0caJcPBynF8rpUBADKFw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\filon\\source\\repos\\2020-2021\\_NET\\Lab4-17\\lab4_1\\lab4\\lab4_1.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\filon\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\filon\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
