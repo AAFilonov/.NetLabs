@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace lab4
+namespace Lab4
 {
     public class Class1
     {

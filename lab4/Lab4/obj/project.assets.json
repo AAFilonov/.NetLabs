@@ -185,11 +185,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\filon\\source\\repos\\2020-2021\\_NET\\Lab4-17\\lab4_1\\lab4\\lab4_1.csproj",
-      "projectName": "lab4_1",
-      "projectPath": "C:\\Users\\filon\\source\\repos\\2020-2021\\_NET\\Lab4-17\\lab4_1\\lab4\\lab4_1.csproj",
+      "projectUniqueName": "C:\\Users\\filon\\source\\repos\\2020-2021\\_NET\\Lab4-17\\lab4\\Lab4\\Lab4_1.csproj",
+      "projectName": "Lab4_1",
+      "projectPath": "C:\\Users\\filon\\source\\repos\\2020-2021\\_NET\\Lab4-17\\lab4\\Lab4\\Lab4_1.csproj",
       "packagesPath": "C:\\Users\\filon\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\filon\\source\\repos\\2020-2021\\_NET\\Lab4-17\\lab4_1\\lab4\\obj\\",
+      "outputPath": "C:\\Users\\filon\\source\\repos\\2020-2021\\_NET\\Lab4-17\\lab4\\Lab4\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\filon\\AppData\\Roaming\\NuGet\\NuGet.Config",
