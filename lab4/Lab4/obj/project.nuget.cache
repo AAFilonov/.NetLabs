@@ -1,11 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "P+obScJprTduyKztHPsUurJMLWo5Kl8R1MSkDOfNND1YNpgljhq0b3QryMJAYkmYbMwKGc0BDqXNgKunFAapaA==",
+  "dgSpecHash": "wHX3hrKC7/UCQ7Rv0V6R5bHys15P2MDK5MCNzZJuNbWaP2vr9BDR498jY26ccKY2s/VwTbYCi973FrmO4jzF6g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\filon\\source\\repos\\2020-2021\\_NET\\Lab4-17\\lab4\\Lab4\\Lab4_1.csproj",
+  "projectFilePath": "C:\\Users\\Professional\\source\\repos\\.Net\\lab4\\Lab4\\Lab4.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\filon\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
-    "C:\\Users\\filon\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+    "C:\\Users\\Professional\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\Professional\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
   ],
   "logs": []
 }
