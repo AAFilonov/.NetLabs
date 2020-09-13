@@ -5,15 +5,39 @@ using System;
 2. Клиенты (фамилия, имя, отчество, адрес, телефон).*/
 namespace Lab4
 {
-    
+    /// <summary>
     /// Клиент
+    /// </summary>
     public class Client : IValidatable
     {
-       public FIO Fio { get; set; } = new FIO();
+        /// <summary>
+        /// Уникальный идентификатор нового клиента (аналог автоинкремента)
+        /// </summary>
+  
+        private static int _newClientId;
+        private static int NewClientId
+        {
+            get
+            {
+                _newClientId++;
+                return _newClientId;
+            }
+        }
+        /// <summary>
+        /// Уникальный идентификатор клиента
+        /// </summary>
+        public int ClientId { get; }
+
+        public FIO Fio { get; set; } = new FIO();
+        /// <summary>
         /// Адрес
+        /// </summary>
         public string Adress { get; set; } = "";
-        /// Номер телефонаы
+        /// <summary>
+        /// Номер телефона
+        /// </summary>
         public string PhoneNumber { get; set; } = "";
+       
 
         public bool IsValid
         {
@@ -32,6 +56,7 @@ namespace Lab4
 
         public Client()
         {
+            ClientId = NewClientId;
         }
         public Client(string firstName, string
         lastName, string middleName,string adress,string phoneNumber)
@@ -39,7 +64,8 @@ namespace Lab4
             Fio = new FIO(firstName, lastName, middleName);
             Adress = adress;
             PhoneNumber = phoneNumber;
-            
+            ClientId = NewClientId;
+
         }
         public override string ToString()
         {

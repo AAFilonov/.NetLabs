@@ -6,7 +6,10 @@ using System.Text;
 3. Выданные автомобили (автомобиль, клиент, дата выдачи, дата возврата).*/
 namespace Lab4
 {
-    class Rent
+    /// <summary>
+    /// Выданный автомобиль
+    /// </summary>
+    public class RentedCar
     {
         /// <summary>
         /// Клиент
@@ -19,11 +22,11 @@ namespace Lab4
         /// <summary>
         /// Дата начала проживания
         /// </summary>
-        public DateTime StartDate { get; set; }
+        public DateTime StartDate { get; set; } = DateTime.Now;
         /// <summary>
         /// Дата окончания проживания
         /// </summary>
-        public DateTime EndDate { get; set; }
+        public DateTime EndDate { get; set; } = DateTime.Now;
         public bool IsValid
         {
             get
@@ -35,11 +38,11 @@ namespace Lab4
             }
 
         }
-        public Rent()
+        public RentedCar()
         {
 
         }
-        public Rent(Client client, Car car, DateTime startDate, DateTime endDate)
+        public RentedCar(Client client, Car car, DateTime startDate, DateTime endDate)
         {
             Client = client;
             Car = car;

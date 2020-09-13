@@ -4,13 +4,22 @@ using System.Text;
 
 namespace Lab4
 {
+    /// <summary>
+    /// ФИО
+    /// </summary>
     public class FIO: IValidatable
     {
+        /// <summary>
         /// Имя
+        /// </summary>
         public string FirstName { get; set; } = "";
+        /// <summary>
         /// Отчество
+        /// </summary>
         public string MiddleName { get; set; } = "";
+        /// <summary>
         /// Фамилия
+        /// </summary>
         public string LastName { get; set; } = "";
         public bool IsValid
         {

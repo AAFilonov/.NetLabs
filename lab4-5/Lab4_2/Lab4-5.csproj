@@ -64,6 +64,12 @@
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormRentedCar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormRentedCar.Designer.cs">
+      <DependentUpon>FormRentedCar.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FormCar.resx">
@@ -74,6 +80,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormRentedCar.resx">
+      <DependentUpon>FormRentedCar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -98,9 +107,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Lab4\Lab4.csproj">
+    <ProjectReference Include="..\Lab4\ClassLibraryRentService.csproj">
       <Project>{13a6e4d2-8ff9-4d70-8b5a-060101685280}</Project>
-      <Name>Lab4</Name>
+      <Name>ClassLibraryRentService</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
