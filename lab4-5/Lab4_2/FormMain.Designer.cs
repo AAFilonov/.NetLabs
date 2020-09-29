@@ -28,17 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("");
-            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("");
-            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("");
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.клиентыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.добавитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.редактироватьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.автомобилиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.добавитьToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.редактироватьToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ClientsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.add = new System.Windows.Forms.ToolStripMenuItem();
+            this.edit = new System.Windows.Forms.ToolStripMenuItem();
+            this.carsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.editToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.rentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.editToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControlMain = new System.Windows.Forms.TabControl();
             this.tabPageClients = new System.Windows.Forms.TabPage();
             this.listViewClients = new System.Windows.Forms.ListView();
@@ -47,14 +50,12 @@
             this.listViewCars = new System.Windows.Forms.ListView();
             this.columnHeaderNumber = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabPageRentedCars = new System.Windows.Forms.TabPage();
-            this.listViewRentedCars = new System.Windows.Forms.ListView();
+            this.listViewRentedCar = new System.Windows.Forms.ListView();
             this.columnHeaderClientFIO = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderAvto = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderStartDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderEndDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.прокатToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.добавитьToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.редактироватьToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.tabControlMain.SuspendLayout();
             this.tabPageClients.SuspendLayout();
@@ -65,67 +66,92 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.файлToolStripMenuItem,
-            this.клиентыToolStripMenuItem,
-            this.автомобилиToolStripMenuItem,
-            this.прокатToolStripMenuItem});
+            this.fileToolStripMenuItem,
+            this.ClientsToolStripMenuItem,
+            this.carsToolStripMenuItem,
+            this.rentToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(543, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
-            // файлToolStripMenuItem
+            // fileToolStripMenuItem
             // 
-            this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
-            this.файлToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
-            this.файлToolStripMenuItem.Text = "Файл";
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ExitToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
+            this.fileToolStripMenuItem.Text = "Файл";
             // 
-            // клиентыToolStripMenuItem
+            // ClientsToolStripMenuItem
             // 
-            this.клиентыToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.добавитьToolStripMenuItem,
-            this.редактироватьToolStripMenuItem});
-            this.клиентыToolStripMenuItem.Name = "клиентыToolStripMenuItem";
-            this.клиентыToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
-            this.клиентыToolStripMenuItem.Text = "Клиенты";
+            this.ClientsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.add,
+            this.edit});
+            this.ClientsToolStripMenuItem.Name = "ClientsToolStripMenuItem";
+            this.ClientsToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
+            this.ClientsToolStripMenuItem.Text = "Клиенты";
             // 
-            // добавитьToolStripMenuItem
+            // add
             // 
-            this.добавитьToolStripMenuItem.Name = "добавитьToolStripMenuItem";
-            this.добавитьToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
-            this.добавитьToolStripMenuItem.Text = "Добавить";
-            this.добавитьToolStripMenuItem.Click += new System.EventHandler(this.addClientToolStripMenuItem_Click);
+            this.add.Name = "add";
+            this.add.Size = new System.Drawing.Size(154, 22);
+            this.add.Text = "Добавить";
+            this.add.Click += new System.EventHandler(this.addClientToolStripMenuItem_Click);
             // 
-            // редактироватьToolStripMenuItem
+            // edit
             // 
-            this.редактироватьToolStripMenuItem.Name = "редактироватьToolStripMenuItem";
-            this.редактироватьToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
-            this.редактироватьToolStripMenuItem.Text = "Редактировать";
-            this.редактироватьToolStripMenuItem.Click += new System.EventHandler(this.editClientToolStripMenuItem_Click);
+            this.edit.Name = "edit";
+            this.edit.Size = new System.Drawing.Size(154, 22);
+            this.edit.Text = "Редактировать";
+            this.edit.Click += new System.EventHandler(this.editClientToolStripMenuItem_Click);
             // 
-            // автомобилиToolStripMenuItem
+            // carsToolStripMenuItem
             // 
-            this.автомобилиToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.добавитьToolStripMenuItem1,
-            this.редактироватьToolStripMenuItem1});
-            this.автомобилиToolStripMenuItem.Name = "автомобилиToolStripMenuItem";
-            this.автомобилиToolStripMenuItem.Size = new System.Drawing.Size(89, 20);
-            this.автомобилиToolStripMenuItem.Text = "Автомобили";
+            this.carsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addToolStripMenuItem1,
+            this.editToolStripMenuItem1});
+            this.carsToolStripMenuItem.Name = "carsToolStripMenuItem";
+            this.carsToolStripMenuItem.Size = new System.Drawing.Size(89, 20);
+            this.carsToolStripMenuItem.Text = "Автомобили";
             // 
-            // добавитьToolStripMenuItem1
+            // addToolStripMenuItem1
             // 
-            this.добавитьToolStripMenuItem1.Name = "добавитьToolStripMenuItem1";
-            this.добавитьToolStripMenuItem1.Size = new System.Drawing.Size(154, 22);
-            this.добавитьToolStripMenuItem1.Text = "Добавить";
-            this.добавитьToolStripMenuItem1.Click += new System.EventHandler(this.addCarToolStripMenuItem_Click);
+            this.addToolStripMenuItem1.Name = "addToolStripMenuItem1";
+            this.addToolStripMenuItem1.Size = new System.Drawing.Size(154, 22);
+            this.addToolStripMenuItem1.Text = "Добавить";
+            this.addToolStripMenuItem1.Click += new System.EventHandler(this.addCarToolStripMenuItem_Click);
             // 
-            // редактироватьToolStripMenuItem1
+            // editToolStripMenuItem1
             // 
-            this.редактироватьToolStripMenuItem1.Name = "редактироватьToolStripMenuItem1";
-            this.редактироватьToolStripMenuItem1.Size = new System.Drawing.Size(154, 22);
-            this.редактироватьToolStripMenuItem1.Text = "Редактировать";
-            this.редактироватьToolStripMenuItem1.Click += new System.EventHandler(this.editCarToolStripMenuItem_Click);
+            this.editToolStripMenuItem1.Name = "editToolStripMenuItem1";
+            this.editToolStripMenuItem1.Size = new System.Drawing.Size(154, 22);
+            this.editToolStripMenuItem1.Text = "Редактировать";
+            this.editToolStripMenuItem1.Click += new System.EventHandler(this.editCarToolStripMenuItem_Click);
+            // 
+            // rentToolStripMenuItem
+            // 
+            this.rentToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addToolStripMenuItem2,
+            this.editToolStripMenuItem2});
+            this.rentToolStripMenuItem.Name = "rentToolStripMenuItem";
+            this.rentToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
+            this.rentToolStripMenuItem.Text = "Прокат";
+            // 
+            // addToolStripMenuItem2
+            // 
+            this.addToolStripMenuItem2.Name = "addToolStripMenuItem2";
+            this.addToolStripMenuItem2.Size = new System.Drawing.Size(154, 22);
+            this.addToolStripMenuItem2.Text = "Добавить";
+            this.addToolStripMenuItem2.Click += new System.EventHandler(this.addRentToolStripMenuItem_Click);
+            // 
+            // editToolStripMenuItem2
+            // 
+            this.editToolStripMenuItem2.Name = "editToolStripMenuItem2";
+            this.editToolStripMenuItem2.Size = new System.Drawing.Size(154, 22);
+            this.editToolStripMenuItem2.Text = "Редактировать";
+            this.editToolStripMenuItem2.Click += new System.EventHandler(this.editRentedCarToolStripMenuItem_Click);
             // 
             // tabControlMain
             // 
@@ -159,13 +185,14 @@
             this.listViewClients.GridLines = true;
             this.listViewClients.HideSelection = false;
             this.listViewClients.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem4});
+            listViewItem1});
             this.listViewClients.Location = new System.Drawing.Point(3, 3);
             this.listViewClients.Name = "listViewClients";
             this.listViewClients.Size = new System.Drawing.Size(529, 271);
             this.listViewClients.TabIndex = 0;
             this.listViewClients.UseCompatibleStateImageBehavior = false;
             this.listViewClients.View = System.Windows.Forms.View.Details;
+            this.listViewClients.KeyUp += new System.Windows.Forms.KeyEventHandler(this.listViewClients_KeyUp);
             // 
             // columnHeaderFIO
             // 
@@ -192,13 +219,14 @@
             this.listViewCars.GridLines = true;
             this.listViewCars.HideSelection = false;
             this.listViewCars.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem5});
+            listViewItem2});
             this.listViewCars.Location = new System.Drawing.Point(3, 3);
             this.listViewCars.Name = "listViewCars";
             this.listViewCars.Size = new System.Drawing.Size(529, 271);
             this.listViewCars.TabIndex = 1;
             this.listViewCars.UseCompatibleStateImageBehavior = false;
             this.listViewCars.View = System.Windows.Forms.View.Details;
+            this.listViewCars.KeyUp += new System.Windows.Forms.KeyEventHandler(this.listViewCars_KeyUp);
             // 
             // columnHeaderNumber
             // 
@@ -207,7 +235,7 @@
             // 
             // tabPageRentedCars
             // 
-            this.tabPageRentedCars.Controls.Add(this.listViewRentedCars);
+            this.tabPageRentedCars.Controls.Add(this.listViewRentedCar);
             this.tabPageRentedCars.Location = new System.Drawing.Point(4, 22);
             this.tabPageRentedCars.Name = "tabPageRentedCars";
             this.tabPageRentedCars.Size = new System.Drawing.Size(535, 277);
@@ -215,68 +243,53 @@
             this.tabPageRentedCars.Text = "Прокат";
             this.tabPageRentedCars.UseVisualStyleBackColor = true;
             // 
-            // listViewRentedCars
+            // listViewRentedCar
             // 
-            this.listViewRentedCars.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.listViewRentedCar.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeaderClientFIO,
             this.columnHeaderAvto,
             this.columnHeaderStartDate,
             this.columnHeaderEndDate});
-            this.listViewRentedCars.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listViewRentedCars.FullRowSelect = true;
-            this.listViewRentedCars.GridLines = true;
-            this.listViewRentedCars.HideSelection = false;
-            this.listViewRentedCars.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem6});
-            this.listViewRentedCars.Location = new System.Drawing.Point(0, 0);
-            this.listViewRentedCars.Name = "listViewRentedCars";
-            this.listViewRentedCars.Size = new System.Drawing.Size(535, 277);
-            this.listViewRentedCars.TabIndex = 2;
-            this.listViewRentedCars.UseCompatibleStateImageBehavior = false;
-            this.listViewRentedCars.View = System.Windows.Forms.View.Details;
+            this.listViewRentedCar.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listViewRentedCar.FullRowSelect = true;
+            this.listViewRentedCar.GridLines = true;
+            this.listViewRentedCar.HideSelection = false;
+            this.listViewRentedCar.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem3});
+            this.listViewRentedCar.Location = new System.Drawing.Point(0, 0);
+            this.listViewRentedCar.Name = "listViewRentedCar";
+            this.listViewRentedCar.Size = new System.Drawing.Size(535, 277);
+            this.listViewRentedCar.TabIndex = 2;
+            this.listViewRentedCar.UseCompatibleStateImageBehavior = false;
+            this.listViewRentedCar.View = System.Windows.Forms.View.Details;
+            this.listViewRentedCar.KeyUp += new System.Windows.Forms.KeyEventHandler(this.listViewRentedCars_KeyUp);
             // 
             // columnHeaderClientFIO
             // 
             this.columnHeaderClientFIO.Text = "ФИО клиента";
-            this.columnHeaderClientFIO.Width = 139;
+            this.columnHeaderClientFIO.Width = 189;
             // 
             // columnHeaderAvto
             // 
             this.columnHeaderAvto.Text = "Машина";
-            this.columnHeaderAvto.Width = 122;
+            this.columnHeaderAvto.Width = 88;
             // 
             // columnHeaderStartDate
             // 
             this.columnHeaderStartDate.Text = "Начало проката";
-            this.columnHeaderStartDate.Width = 152;
+            this.columnHeaderStartDate.Width = 124;
             // 
             // columnHeaderEndDate
             // 
             this.columnHeaderEndDate.Text = "Конец проката";
             this.columnHeaderEndDate.Width = 118;
             // 
-            // прокатToolStripMenuItem
+            // ExitToolStripMenuItem
             // 
-            this.прокатToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.добавитьToolStripMenuItem2,
-            this.редактироватьToolStripMenuItem2});
-            this.прокатToolStripMenuItem.Name = "прокатToolStripMenuItem";
-            this.прокатToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
-            this.прокатToolStripMenuItem.Text = "Прокат";
-            // 
-            // добавитьToolStripMenuItem2
-            // 
-            this.добавитьToolStripMenuItem2.Name = "добавитьToolStripMenuItem2";
-            this.добавитьToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
-            this.добавитьToolStripMenuItem2.Text = "Добавить";
-            this.добавитьToolStripMenuItem2.Click += new System.EventHandler(this.addRentToolStripMenuItem_Click);
-            // 
-            // редактироватьToolStripMenuItem2
-            // 
-            this.редактироватьToolStripMenuItem2.Name = "редактироватьToolStripMenuItem2";
-            this.редактироватьToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
-            this.редактироватьToolStripMenuItem2.Text = "Редактировать";
-            this.редактироватьToolStripMenuItem2.Click += new System.EventHandler(this.editSettlementToolStripMenuItem_Click);
+            this.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem";
+            this.ExitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ExitToolStripMenuItem.Text = "Выход";
+            this.ExitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // FormMain
             // 
@@ -302,13 +315,13 @@
         #endregion
 
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem файлToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem клиентыToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem добавитьToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem редактироватьToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem автомобилиToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem добавитьToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem редактироватьToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ClientsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem add;
+        private System.Windows.Forms.ToolStripMenuItem edit;
+        private System.Windows.Forms.ToolStripMenuItem carsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem addToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem1;
         private System.Windows.Forms.TabControl tabControlMain;
         private System.Windows.Forms.TabPage tabPageClients;
         private System.Windows.Forms.ListView listViewClients;
@@ -317,14 +330,15 @@
         private System.Windows.Forms.ListView listViewCars;
         private System.Windows.Forms.ColumnHeader columnHeaderNumber;
         private System.Windows.Forms.TabPage tabPageRentedCars;
-        private System.Windows.Forms.ListView listViewRentedCars;
+        private System.Windows.Forms.ListView listViewRentedCar;
         private System.Windows.Forms.ColumnHeader columnHeaderClientFIO;
         private System.Windows.Forms.ColumnHeader columnHeaderAvto;
         private System.Windows.Forms.ColumnHeader columnHeaderStartDate;
         private System.Windows.Forms.ColumnHeader columnHeaderEndDate;
-        private System.Windows.Forms.ToolStripMenuItem прокатToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem добавитьToolStripMenuItem2;
-        private System.Windows.Forms.ToolStripMenuItem редактироватьToolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem rentToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem addToolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem ExitToolStripMenuItem;
     }
 }
 

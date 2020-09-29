@@ -5,26 +5,33 @@ namespace Lab4_2
 {
     public partial class FormClient : Form
     {
-        public Client Client { get; }
-        public FormClient(Client client)
+        private Client _client;
+        public Client Client
+        {
+            get { return _client; }
+            set
+            {
+                _client = value;
+                FirstNameTextBox.Text = Client.Fio.FirstName;
+                MiddleNameTextBox.Text = Client.Fio.MiddleName;
+                LastNameTextBox.Text = Client.Fio.LastName;
+                AdressTextBox.Text = Client.Adress;
+                maskedTextBoxPhone.Text = Client.PhoneNumber;
+            }
+        }
+        public FormClient()
         {
             InitializeComponent();
-            Client = client;
-            FirstNameTextBox.Text = Client.Fio.FirstName;
-            MiddleNameTextBox.Text = Client.Fio.MiddleName;
-            LastNameTextBox.Text = Client.Fio.LastName;
-            AdressTextBox.Text = Client.Adress;
-            maskedTextBoxPhone.Text = Client.PhoneNumber;
-
         }
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
-            Client.Fio.FirstName = FirstNameTextBox.Text;
-            Client.Fio.MiddleName = MiddleNameTextBox.Text;
-            Client.Fio.LastName = LastNameTextBox.Text;
-            Client.Adress = AdressTextBox.Text;
-            Client.PhoneNumber = maskedTextBoxPhone.Text;
+
+            _client.Fio.FirstName = FirstNameTextBox.Text;
+            _client.Fio.MiddleName = MiddleNameTextBox.Text;
+            _client.Fio.LastName = LastNameTextBox.Text;
+            _client.Adress = AdressTextBox.Text;
+            _client.PhoneNumber = maskedTextBoxPhone.Text;
         }
     }
 }

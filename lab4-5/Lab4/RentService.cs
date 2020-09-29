@@ -11,11 +11,28 @@ namespace ClassLibraryRentService
     ///</summary>
     public class RentService
     {
+        private static RentService _instance;
         /// <summary>
         /// Единственный экземпляр класса RentService
         /// </summary>
-        private static RentService _instance;
+        public static RentService Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    _instance = new RentService();
+                }
+                return _instance;
+            }
+        }
+        /// <summary>
+        /// Приватный конструктор
+        /// </summary>
+        private RentService()
+        {
 
+        }
 
         ///<summery>
         /// Словарь клиентов
@@ -29,12 +46,16 @@ namespace ClassLibraryRentService
         ///Список выданных автомобилей
         ///</summary>
        private  List<RentedCar> _rentedCars = new List<RentedCar>();
+
+        /// <summary>
+        /// Коллекция клиентов
+        /// </summary>
         public IEnumerable<Client> Clients
         {
             get { return _clients.Values.AsEnumerable(); }
         }
         /// <summary>
-        /// Коллекция номеров
+        /// Коллекция автомобилей
         /// </summary>
         public IEnumerable<Car> Cars
         {
@@ -44,7 +65,7 @@ namespace ClassLibraryRentService
             }
         }
         /// <summary>
-        /// Коллекция поселений
+        /// Коллекция выданных автомобилей
         /// </summary>
         public IEnumerable<RentedCar> RentedCars
         {
@@ -107,7 +128,7 @@ namespace ClassLibraryRentService
         /// Информация о поселении
         /// </summary>
         /// <param name="rentedCar"></param>
-        public void AddrentedCar(RentedCar rentedCar)
+        public void AddRentedCar(RentedCar rentedCar)
         {
             if (!rentedCar.IsValid)
             {
@@ -117,11 +138,11 @@ namespace ClassLibraryRentService
             {
                 _rentedCars.Add(rentedCar);
                 //Герерируем событие о том, что информация о поселении добавлена
-                rentedCarAdded?.Invoke(rentedCar, EventArgs.Empty);
+                RentedCarRemoved?.Invoke(rentedCar, EventArgs.Empty);
             }
             catch (System.Exception exception)
             {
-                throw new InvalidrentedCarException("При поселении произошла ошибка", exception);
+                throw new InvalidRentedCarException("При поселении произошла ошибка", exception);
             }
         }
         /// <summary>
@@ -131,62 +152,44 @@ namespace ClassLibraryRentService
         public void RemoveClient(int clientKey)
         {
             _clients.Remove(clientKey);
-            //Генерируем событие о том, что клиент удалён
             ClientRemoved?.Invoke(clientKey, EventArgs.Empty);
-            //Получаем список сведений о поселении клиента
-            var rentedCarsForClient = rentedCars.Where(s => s.Client.ClientId == clientKey).ToList();
+            var rentedCarsForClient = RentedCars.Where(s => s.Client.ClientId == clientKey).ToList();
             for (int i = 0; i < rentedCarsForClient.Count; i++)
             {
-                //Удаляем сведения о поселении клиента
-                RemoverentedCar(rentedCarsForClient[i]);
+                RemoveRentedCar(rentedCarsForClient[i]);
             }
         }
-
         /// <summary>
         /// Удалить номер по идентификатору
         /// </summary>
         /// <param name="carKey"></param>
-        public void Removecar(int carKey)
+        public void RemoveCar(int carKey)
         {
             _cars.Remove(carKey);
            
             CarRemoved?.Invoke(carKey, EventArgs.Empty);
   
-            var rentedCarsForcar = RentedCars.Where(s => s.Car.Number == carKey).ToList();
-            for (int i = 0; i < rentedCarsForcar.Count; i++)
+            var rentedCarsForCar = RentedCars.Where(s => s.Car.Number == carKey).ToList();
+            for (int i = 0; i < rentedCarsForCar.Count; i++)
             {
               
-                RemoverentedCar(rentedCarsForCar[i]);
+                RemoveRentedCar(rentedCarsForCar[i]);
             }
         }
         /// <summary>
         /// Удалить информацию о поселении
         /// </summary>
         /// <param name="rentedCar">Информация о поселении</param>
-        public void RemoverentedCar(rentedCar rentedCar)
+        public void RemoveRentedCar(RentedCar rentedCar)
         {
             _rentedCars.Remove(rentedCar);
             //Генерируем событие о том, что информация о поселении удалена
-            rentedCarRemoved?.Invoke(rentedCar, EventArgs.Empty);
+            RentedCarRemoved?.Invoke(rentedCar, EventArgs.Empty);
         }
 
 
 
-        public static RentService Instance
-        {
-            get
-            {
-                if (_instance == null)
-                {
-                    _instance = new RentService();
-                }
-                return _instance;
-            }
-        }
-        private RentService()
-        {
-
-        }
+      
 
     }
 }

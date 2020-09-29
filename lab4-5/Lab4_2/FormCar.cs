@@ -13,26 +13,36 @@ namespace Lab4_2
 {
     public partial class FormCar : Form
     {
-        public Car Car { get; }
-        public FormCar(Car car)
+        private Car _car;
+        public Car Car
+        { get 
+            {
+                return _car;
+            }
+            set
+            {
+                _car = value;
+                TypeComboBox.SelectedItem = _car.Type;
+                MarkTextBox.Text = _car.Mark;
+                PriceNumericUpDown.Value = _car.Price;
+                PriceRentNumericUpDown.Value = _car.PriceRent;
+            }
+        }
+        public FormCar()
         {
             InitializeComponent();
-            Car = car;
             TypeComboBox.Items.Add(CarType.Motorcycle);
             TypeComboBox.Items.Add(CarType.PassengerСar);
             TypeComboBox.Items.Add(CarType.Truck);
-            TypeComboBox.SelectedItem = car.Type;
-            MarkTextBox.Text =  car.Mark;
-            PriceNumericUpDown.Value =  car.Price;
-            PriceRentNumericUpDown.Value = car.PriceRent;
+          
         }
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
-            Car.Mark = MarkTextBox.Text;
-            Car.Price = PriceNumericUpDown.Value;
-            Car.PriceRent = PriceRentNumericUpDown.Value;
-            Car.Type = (CarType)TypeComboBox.SelectedItem;
+            _car.Mark = MarkTextBox.Text;
+            _car.Price = PriceNumericUpDown.Value;
+            _car.PriceRent = PriceRentNumericUpDown.Value;
+            _car.Type = (CarType)TypeComboBox.SelectedItem;
         }
     }
 }
