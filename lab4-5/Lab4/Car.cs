@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 /*Прокат автомобилей
 1. Автомобили (марка, стоимость, стоимость проката, тип).*/
-namespace Lab4
+namespace ClassLibraryRentService
 {
     /// <summary>
     /// Автомобиль

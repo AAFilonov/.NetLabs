@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-using Lab4;
+using ClassLibraryRentService;
 
 namespace Lab4_2
 {

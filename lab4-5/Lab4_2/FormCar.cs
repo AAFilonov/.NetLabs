@@ -1,4 +1,4 @@
-﻿using Lab4;
+﻿using ClassLibraryRentService;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

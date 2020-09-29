@@ -4,7 +4,7 @@ using System.Text;
 
 /*Прокат автомобилей
 3. Выданные автомобили (автомобиль, клиент, дата выдачи, дата возврата).*/
-namespace Lab4
+namespace ClassLibraryRentService
 {
     /// <summary>
     /// Выданный автомобиль

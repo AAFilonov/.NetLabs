@@ -1,9 +1,9 @@
-﻿using Lab4;
+﻿using ClassLibraryRentService;
 using System;
 
 /*Прокат автомобилей
 2. Клиенты (фамилия, имя, отчество, адрес, телефон).*/
-namespace Lab4
+namespace ClassLibraryRentService
 {
     /// <summary>
     /// Клиент
