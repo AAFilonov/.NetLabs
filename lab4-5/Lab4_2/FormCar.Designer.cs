@@ -37,13 +37,16 @@
             this.PriceNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.PriceRentNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.SaveButton = new System.Windows.Forms.Button();
+            this.labelNumber = new System.Windows.Forms.Label();
+            this.numericUpDownNumber = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.PriceNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PriceRentNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownNumber)).BeginInit();
             this.SuspendLayout();
             // 
             // MarkTextBox
             // 
-            this.MarkTextBox.Location = new System.Drawing.Point(116, 12);
+            this.MarkTextBox.Location = new System.Drawing.Point(119, 41);
             this.MarkTextBox.Name = "MarkTextBox";
             this.MarkTextBox.Size = new System.Drawing.Size(120, 20);
             this.MarkTextBox.TabIndex = 0;
@@ -51,7 +54,7 @@
             // MarkLabel
             // 
             this.MarkLabel.AutoSize = true;
-            this.MarkLabel.Location = new System.Drawing.Point(9, 15);
+            this.MarkLabel.Location = new System.Drawing.Point(12, 44);
             this.MarkLabel.Name = "MarkLabel";
             this.MarkLabel.Size = new System.Drawing.Size(40, 13);
             this.MarkLabel.TabIndex = 1;
@@ -60,7 +63,7 @@
             // PriceLabel
             // 
             this.PriceLabel.AutoSize = true;
-            this.PriceLabel.Location = new System.Drawing.Point(9, 50);
+            this.PriceLabel.Location = new System.Drawing.Point(12, 79);
             this.PriceLabel.Name = "PriceLabel";
             this.PriceLabel.Size = new System.Drawing.Size(62, 13);
             this.PriceLabel.TabIndex = 2;
@@ -69,7 +72,7 @@
             // PriceRentlabel
             // 
             this.PriceRentlabel.AutoSize = true;
-            this.PriceRentlabel.Location = new System.Drawing.Point(9, 82);
+            this.PriceRentlabel.Location = new System.Drawing.Point(12, 111);
             this.PriceRentlabel.Name = "PriceRentlabel";
             this.PriceRentlabel.Size = new System.Drawing.Size(103, 13);
             this.PriceRentlabel.TabIndex = 3;
@@ -78,7 +81,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 115);
+            this.label1.Location = new System.Drawing.Point(12, 144);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(26, 13);
             this.label1.TabIndex = 4;
@@ -87,21 +90,21 @@
             // TypeComboBox
             // 
             this.TypeComboBox.FormattingEnabled = true;
-            this.TypeComboBox.Location = new System.Drawing.Point(116, 112);
+            this.TypeComboBox.Location = new System.Drawing.Point(119, 141);
             this.TypeComboBox.Name = "TypeComboBox";
             this.TypeComboBox.Size = new System.Drawing.Size(120, 21);
             this.TypeComboBox.TabIndex = 5;
             // 
             // PriceNumericUpDown
             // 
-            this.PriceNumericUpDown.Location = new System.Drawing.Point(116, 48);
+            this.PriceNumericUpDown.Location = new System.Drawing.Point(119, 77);
             this.PriceNumericUpDown.Name = "PriceNumericUpDown";
             this.PriceNumericUpDown.Size = new System.Drawing.Size(120, 20);
             this.PriceNumericUpDown.TabIndex = 6;
             // 
             // PriceRentNumericUpDown
             // 
-            this.PriceRentNumericUpDown.Location = new System.Drawing.Point(118, 80);
+            this.PriceRentNumericUpDown.Location = new System.Drawing.Point(121, 109);
             this.PriceRentNumericUpDown.Name = "PriceRentNumericUpDown";
             this.PriceRentNumericUpDown.Size = new System.Drawing.Size(120, 20);
             this.PriceRentNumericUpDown.TabIndex = 7;
@@ -109,7 +112,7 @@
             // SaveButton
             // 
             this.SaveButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.SaveButton.Location = new System.Drawing.Point(161, 139);
+            this.SaveButton.Location = new System.Drawing.Point(164, 168);
             this.SaveButton.Name = "SaveButton";
             this.SaveButton.Size = new System.Drawing.Size(75, 23);
             this.SaveButton.TabIndex = 8;
@@ -117,11 +120,29 @@
             this.SaveButton.UseVisualStyleBackColor = true;
             this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
+            // labelNumber
+            // 
+            this.labelNumber.AutoSize = true;
+            this.labelNumber.Location = new System.Drawing.Point(12, 9);
+            this.labelNumber.Name = "labelNumber";
+            this.labelNumber.Size = new System.Drawing.Size(41, 13);
+            this.labelNumber.TabIndex = 9;
+            this.labelNumber.Text = "Номер";
+            // 
+            // numericUpDownNumber
+            // 
+            this.numericUpDownNumber.Location = new System.Drawing.Point(121, 7);
+            this.numericUpDownNumber.Name = "numericUpDownNumber";
+            this.numericUpDownNumber.Size = new System.Drawing.Size(120, 20);
+            this.numericUpDownNumber.TabIndex = 10;
+            // 
             // FormCar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(247, 169);
+            this.ClientSize = new System.Drawing.Size(247, 207);
+            this.Controls.Add(this.numericUpDownNumber);
+            this.Controls.Add(this.labelNumber);
             this.Controls.Add(this.SaveButton);
             this.Controls.Add(this.PriceRentNumericUpDown);
             this.Controls.Add(this.PriceNumericUpDown);
@@ -133,8 +154,10 @@
             this.Controls.Add(this.MarkTextBox);
             this.Name = "FormCar";
             this.Text = "Автомобиль";
+            this.Load += new System.EventHandler(this.FormCar_Load);
             ((System.ComponentModel.ISupportInitialize)(this.PriceNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PriceRentNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownNumber)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -151,5 +174,7 @@
         private System.Windows.Forms.NumericUpDown PriceNumericUpDown;
         private System.Windows.Forms.NumericUpDown PriceRentNumericUpDown;
         private System.Windows.Forms.Button SaveButton;
+        private System.Windows.Forms.Label labelNumber;
+        private System.Windows.Forms.NumericUpDown numericUpDownNumber;
     }
 }

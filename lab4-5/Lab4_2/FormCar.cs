@@ -22,6 +22,7 @@ namespace Lab4_2
             set
             {
                 _car = value;
+                numericUpDownNumber.Value = _car.Number;
                 TypeComboBox.SelectedItem = _car.Type;
                 MarkTextBox.Text = _car.Mark;
                 PriceNumericUpDown.Value = _car.Price;
@@ -39,10 +40,16 @@ namespace Lab4_2
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
+            _car.Number = (int)numericUpDownNumber.Value;
             _car.Mark = MarkTextBox.Text;
             _car.Price = PriceNumericUpDown.Value;
             _car.PriceRent = PriceRentNumericUpDown.Value;
             _car.Type = (CarType)TypeComboBox.SelectedItem;
+        }
+
+        private void FormCar_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

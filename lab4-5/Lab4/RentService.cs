@@ -111,7 +111,7 @@ namespace ClassLibraryRentService
         {
             if (!car.IsValid)
             {
-                throw new InvalidCarException("Информация о номере заполнена некорректно");
+                throw new InvalidCarException("Информация о автомобиле заполнена некорректно");
             }
             try
             {
@@ -121,7 +121,7 @@ namespace ClassLibraryRentService
             }
             catch (System.Exception exception)
             {
-                throw new InvalidCarException("При добавлении номера произошла ошибка", exception);
+                throw new InvalidCarException("При добавлении автомобиля произошла ошибка", exception);
             }
         }
         /// <summary>
@@ -132,17 +132,17 @@ namespace ClassLibraryRentService
         {
             if (!rentedCar.IsValid)
             {
-                throw new InvalidRentedCarException("Информация о заселении заполнена некорректно");
+                throw new InvalidRentedCarException("Информация о аренде заполнена некорректно");
             }
             try
             {
                 _rentedCars.Add(rentedCar);
                 //Герерируем событие о том, что информация о поселении добавлена
-                RentedCarRemoved?.Invoke(rentedCar, EventArgs.Empty);
+                RentedCarAdded?.Invoke(rentedCar, EventArgs.Empty);
             }
             catch (System.Exception exception)
             {
-                throw new InvalidRentedCarException("При поселении произошла ошибка", exception);
+                throw new InvalidRentedCarException("При создании акта аренды произошла ошибка", exception);
             }
         }
         /// <summary>

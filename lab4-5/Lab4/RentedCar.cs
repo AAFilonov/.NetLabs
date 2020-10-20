@@ -33,7 +33,7 @@ namespace ClassLibraryRentService
             {
                 if (Client == null) return false;
                 if (Car == null) return false;
-                if (EndDate <= StartDate) return false;
+                if (EndDate < StartDate) return false;
                 return true;
             }
 

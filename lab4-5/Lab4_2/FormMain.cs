@@ -142,7 +142,6 @@ namespace Lab4_2
             }
         }
 
-      
 
         private void addCarToolStripMenuItem_Click(object sender, EventArgs e)
         {
