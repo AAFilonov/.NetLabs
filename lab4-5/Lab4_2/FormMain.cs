@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using ClassLibraryRentService;
+using WindowsFormsControlLibraryRentService;
 
 namespace Lab4_2
 {
@@ -25,13 +26,14 @@ namespace Lab4_2
 
 
         private void _rentService_RentedCarRemoved(object sender, EventArgs e)
-        {
+        {        
+          
             var RentedCar = sender as RentedCar;
-            for (int i = 0; i < listViewRentedCar.Items.Count; i++)
+            for (int i = 0; i < tabPageRentedCars.Controls.Count; i++)
             {
-                if ((RentedCar)listViewRentedCar.Items[i].Tag == RentedCar)
+                if ((tabPageRentedCars.Controls[i] as UserControlRentedCar)?.RentedCar == RentedCar)
                 {
-                    listViewRentedCar.Items.RemoveAt(i);
+                    tabPageRentedCars.Controls.RemoveAt(i);
                     break;
                 }
             }
@@ -65,18 +67,14 @@ namespace Lab4_2
 
         private void _rentService_RentedCarAdded(object sender, EventArgs e)
         {
-            var RentedCar = sender as RentedCar;
-            if (RentedCar != null)
+            var rentedCar = sender as RentedCar;
+            if (rentedCar != null)
             {
-                var listViewItem = new ListViewItem
+                UserControlRentedCar userControl = new UserControlRentedCar(rentedCar)
                 {
-                    Tag = RentedCar,
-                    Text = RentedCar.Client.ToString()
+                    Dock = DockStyle.Top
                 };
-                listViewItem.SubItems.Add(RentedCar.Car.ToString());
-                listViewItem.SubItems.Add(RentedCar.StartDate.ToShortDateString());
-                listViewItem.SubItems.Add(RentedCar.EndDate.ToShortDateString());
-                listViewRentedCar.Items.Add(listViewItem);
+                tabPageRentedCars.Controls.Add(userControl);
             }
         }
 
@@ -180,13 +178,13 @@ namespace Lab4_2
        
         private void addRentToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var RentedCar = new RentedCar();
-            _formRentedCar.RentedCar = RentedCar;
+            var rentedCar = new RentedCar();
+            _formRentedCar.RentedCar = rentedCar;
             if (_formRentedCar.ShowDialog() == DialogResult.OK)
             {
                 try
                 {
-                    _RentService.AddRentedCar(RentedCar);
+                    _RentService.AddRentedCar(rentedCar);
                 }
                 catch (Exception exception)
                 {
@@ -199,16 +197,22 @@ namespace Lab4_2
         {
             try
             {
-                var RentedCar = listViewRentedCar.SelectedItems[0].Tag as RentedCar;
-                _formRentedCar.RentedCar = RentedCar;
-                if (_formRentedCar.ShowDialog() == DialogResult.OK)
+                for (int i = 0; i < tabPageRentedCars.Controls.Count; i++)
                 {
-                    RentedCar = _formRentedCar.RentedCar;
-                    var listViewItem = listViewRentedCar.SelectedItems[0];
-                    listViewItem.Text = RentedCar.Client.ToString();
-                    listViewItem.SubItems[1].Text = RentedCar.Car.ToString();
-                    listViewItem.SubItems[2].Text = RentedCar.StartDate.ToShortDateString();
-                    listViewItem.SubItems[3].Text = RentedCar.EndDate.ToShortDateString();
+                    var userControl = tabPageRentedCars.Controls[i] as UserControlRentedCar;
+                    if (userControl != null)
+                    {
+                        if (userControl.Selected)
+                        {
+                            var settlement = userControl.RentedCar;
+                            _formRentedCar.RentedCar= settlement;
+                            if (_formRentedCar.ShowDialog() == DialogResult.OK)
+                            {
+                                userControl.Refresh();
+                            }
+                            break;
+                        }
+                    }
                 }
             }
             catch (Exception)
@@ -260,24 +264,7 @@ namespace Lab4_2
             }
         }
 
-        private void listViewRentedCars_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Delete)
-            {
-                try
-                {
-                    var settlement = listViewRentedCar.SelectedItems[0].Tag as RentedCar;
-                    if (settlement != null)
-                    {
-                        _RentService.RemoveRentedCar(settlement);
-                    }
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("Не выбрана строка с поселением");
-                }
-            }
-        }
+      
 
 
     }

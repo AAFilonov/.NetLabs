@@ -111,6 +111,10 @@
       <Project>{13a6e4d2-8ff9-4d70-8b5a-060101685280}</Project>
       <Name>ClassLibraryRentService</Name>
     </ProjectReference>
+    <ProjectReference Include="..\WindowsFormsControlLibraryRentService\WindowsFormsControlLibraryRentService.csproj">
+      <Project>{b856967c-f632-4fb0-afcf-7acd604d9a39}</Project>
+      <Name>WindowsFormsControlLibraryRentService</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
