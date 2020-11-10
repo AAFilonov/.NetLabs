@@ -114,6 +114,7 @@
             this.Controls.Add(this.labelClient);
             this.Name = "UserControlRentedCar";
             this.Size = new System.Drawing.Size(495, 55);
+            this.Click += new System.EventHandler(this.UserControlRentedCar_Click);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.UserControlRentedCar_Paint);
             this.ResumeLayout(false);
             this.PerformLayout();

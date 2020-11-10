@@ -15,12 +15,16 @@ namespace ClassLibraryRentService
         /// </summary>
   
         private static int _newClientId;
-        private static int NewClientId
+        public static int NewClientId
         {
             get
             {
                 _newClientId++;
                 return _newClientId;
+            }
+            set
+            {
+                _newClientId = value;
             }
         }
         /// <summary>

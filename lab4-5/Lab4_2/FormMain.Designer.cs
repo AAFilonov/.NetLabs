@@ -28,10 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("");
-            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("");
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveXMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveJSONToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveBinaryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadXMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadJSONToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadBinaryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ClientsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.add = new System.Windows.Forms.ToolStripMenuItem();
@@ -50,6 +59,8 @@
             this.listViewCars = new System.Windows.Forms.ListView();
             this.columnHeaderNumber = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabPageRentedCars = new System.Windows.Forms.TabPage();
+            this.saveFileDialogMain = new System.Windows.Forms.SaveFileDialog();
+            this.openFileDialogMain = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1.SuspendLayout();
             this.tabControlMain.SuspendLayout();
             this.tabPageClients.SuspendLayout();
@@ -72,15 +83,85 @@
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.saveToolStripMenuItem,
+            this.loadToolStripMenuItem,
+            this.toolStripSeparator1,
             this.ExitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.fileToolStripMenuItem.Text = "Файл";
             // 
+            // saveToolStripMenuItem
+            // 
+            this.saveToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.saveXMLToolStripMenuItem,
+            this.saveJSONToolStripMenuItem,
+            this.saveBinaryToolStripMenuItem});
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.saveToolStripMenuItem.Text = "Сохранить ";
+            // 
+            // saveXMLToolStripMenuItem
+            // 
+            this.saveXMLToolStripMenuItem.Name = "saveXMLToolStripMenuItem";
+            this.saveXMLToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+            this.saveXMLToolStripMenuItem.Text = "XML";
+            this.saveXMLToolStripMenuItem.Click += new System.EventHandler(this.saveXMLToolStripMenuItem_Click);
+            // 
+            // saveJSONToolStripMenuItem
+            // 
+            this.saveJSONToolStripMenuItem.Name = "saveJSONToolStripMenuItem";
+            this.saveJSONToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+            this.saveJSONToolStripMenuItem.Text = "JSON";
+            this.saveJSONToolStripMenuItem.Click += new System.EventHandler(this.saveJSONToolStripMenuItem_Click);
+            // 
+            // saveBinaryToolStripMenuItem
+            // 
+            this.saveBinaryToolStripMenuItem.Name = "saveBinaryToolStripMenuItem";
+            this.saveBinaryToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+            this.saveBinaryToolStripMenuItem.Text = "Двоичный";
+            this.saveBinaryToolStripMenuItem.Click += new System.EventHandler(this.saveBinaryToolStripMenuItem_Click);
+            // 
+            // loadToolStripMenuItem
+            // 
+            this.loadToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.loadXMLToolStripMenuItem,
+            this.loadJSONToolStripMenuItem,
+            this.loadBinaryToolStripMenuItem});
+            this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.loadToolStripMenuItem.Text = "Загрузить";
+            // 
+            // loadXMLToolStripMenuItem
+            // 
+            this.loadXMLToolStripMenuItem.Name = "loadXMLToolStripMenuItem";
+            this.loadXMLToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.loadXMLToolStripMenuItem.Text = "XML";
+            this.loadXMLToolStripMenuItem.Click += new System.EventHandler(this.loadXMLToolStripMenuItem_Click);
+            // 
+            // loadJSONToolStripMenuItem
+            // 
+            this.loadJSONToolStripMenuItem.Name = "loadJSONToolStripMenuItem";
+            this.loadJSONToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.loadJSONToolStripMenuItem.Text = "JSON";
+            this.loadJSONToolStripMenuItem.Click += new System.EventHandler(this.loadJSONToolStripMenuItem_Click);
+            // 
+            // loadBinaryToolStripMenuItem
+            // 
+            this.loadBinaryToolStripMenuItem.Name = "loadBinaryToolStripMenuItem";
+            this.loadBinaryToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.loadBinaryToolStripMenuItem.Text = "Доичный";
+            this.loadBinaryToolStripMenuItem.Click += new System.EventHandler(this.loadBinaryToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(133, 6);
+            // 
             // ExitToolStripMenuItem
             // 
             this.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem";
-            this.ExitToolStripMenuItem.Size = new System.Drawing.Size(109, 22);
+            this.ExitToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.ExitToolStripMenuItem.Text = "Выход";
             this.ExitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -185,7 +266,7 @@
             this.listViewClients.GridLines = true;
             this.listViewClients.HideSelection = false;
             this.listViewClients.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem3});
+            listViewItem1});
             this.listViewClients.Location = new System.Drawing.Point(3, 3);
             this.listViewClients.Name = "listViewClients";
             this.listViewClients.Size = new System.Drawing.Size(529, 271);
@@ -219,7 +300,7 @@
             this.listViewCars.GridLines = true;
             this.listViewCars.HideSelection = false;
             this.listViewCars.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem4});
+            listViewItem2});
             this.listViewCars.Location = new System.Drawing.Point(3, 3);
             this.listViewCars.Name = "listViewCars";
             this.listViewCars.Size = new System.Drawing.Size(529, 271);
@@ -241,6 +322,10 @@
             this.tabPageRentedCars.TabIndex = 2;
             this.tabPageRentedCars.Text = "Прокат";
             this.tabPageRentedCars.UseVisualStyleBackColor = true;
+            // 
+            // openFileDialogMain
+            // 
+            this.openFileDialogMain.FileName = "hotel";
             // 
             // FormMain
             // 
@@ -284,6 +369,22 @@
         private System.Windows.Forms.ToolStripMenuItem addToolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem ExitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveXMLToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveJSONToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveBinaryToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem loadToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem loadXMLToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem loadJSONToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem loadBinaryToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.SaveFileDialog saveFileDialogMain;
+        private System.Windows.Forms.OpenFileDialog openFileDialogMain;
     }
+
+ 
+   // private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+   // private System.Windows.Forms.OpenFileDialog openFileDialogMain;
+   // private System.Windows.Forms.SaveFileDialog saveFileDialogMain;
 }
 

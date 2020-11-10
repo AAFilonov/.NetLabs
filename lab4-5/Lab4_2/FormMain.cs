@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using ClassLibraryRentService;
 using WindowsFormsControlLibraryRentService;
+using ClassLibraryRentService.Serialization;
 
 namespace Lab4_2
 {
@@ -221,11 +222,7 @@ namespace Lab4_2
             }
         }
 
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
+    
         private void listViewClients_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Delete)
@@ -264,8 +261,67 @@ namespace Lab4_2
             }
         }
 
-      
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
 
+        private void saveXMLToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            saveFileDialogMain.Filter = "XML-файлы|*.xml|Все файлы|*.*";
+            if (saveFileDialogMain.ShowDialog() == DialogResult.OK)
+            {
+                RentServiceSerializable.Save(saveFileDialogMain.FileName, SerializeType.XML);
+            }
+        }
 
+        private void saveJSONToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            saveFileDialogMain.Filter = "JSON-файлы|*.json|Все файлы|*.*";
+            if (saveFileDialogMain.ShowDialog() == DialogResult.OK)
+            {
+                RentServiceSerializable.Save(saveFileDialogMain.FileName, SerializeType.JSON);
+            }
+        }
+
+        private void saveBinaryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            saveFileDialogMain.Filter = "Двоичные файлы|*.bin|Все файлы|*.*";
+            if (saveFileDialogMain.ShowDialog() == DialogResult.OK)
+            {
+                RentServiceSerializable.Save(saveFileDialogMain.FileName, SerializeType.Binary);
+            }
+        }
+
+        private void loadXMLToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openFileDialogMain.Filter = "XML-файлы|*.xml|Все файлы|*.*";
+            if (openFileDialogMain.ShowDialog() == DialogResult.OK)
+            {
+                RentServiceSerializable.Load(openFileDialogMain.FileName, SerializeType.XML);
+
+            }
+        }
+
+        private void loadJSONToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openFileDialogMain.Filter = "JSON-файлы|*.json|Все файлы|*.*";
+            if (openFileDialogMain.ShowDialog() == DialogResult.OK)
+            {
+                RentServiceSerializable.Load(openFileDialogMain.FileName, SerializeType.JSON);
+            }
+        }
+
+        private void loadBinaryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            openFileDialogMain.Filter = "Двоичные файлы|*.bin|Все файлы|*.*";
+            if (openFileDialogMain.ShowDialog() == DialogResult.OK)
+            {
+                RentServiceSerializable.Load(openFileDialogMain.FileName, SerializeType.Binary);
+            }
+        }
     }
+
 }
+
