@@ -45,6 +45,7 @@
             this.buttonAdd = new System.Windows.Forms.Button();
             this.buttonGet = new System.Windows.Forms.Button();
             this.labelResponseStatus = new System.Windows.Forms.Label();
+            this.buttonClearAnimal = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -62,6 +63,7 @@
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.buttonClearAnimal);
             this.panel1.Controls.Add(this.comboBoxProtectionStatus);
             this.panel1.Controls.Add(this.textBoxHabitat);
             this.panel1.Controls.Add(this.textBoxLatin_Title);
@@ -73,7 +75,7 @@
             this.panel1.Controls.Add(this.labelAnimal);
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(277, 161);
+            this.panel1.Size = new System.Drawing.Size(388, 161);
             this.panel1.TabIndex = 1;
             // 
             // comboBoxProtectionStatus
@@ -81,28 +83,28 @@
             this.comboBoxProtectionStatus.FormattingEnabled = true;
             this.comboBoxProtectionStatus.Location = new System.Drawing.Point(127, 128);
             this.comboBoxProtectionStatus.Name = "comboBoxProtectionStatus";
-            this.comboBoxProtectionStatus.Size = new System.Drawing.Size(145, 21);
+            this.comboBoxProtectionStatus.Size = new System.Drawing.Size(256, 21);
             this.comboBoxProtectionStatus.TabIndex = 8;
             // 
             // textBoxHabitat
             // 
             this.textBoxHabitat.Location = new System.Drawing.Point(103, 101);
             this.textBoxHabitat.Name = "textBoxHabitat";
-            this.textBoxHabitat.Size = new System.Drawing.Size(169, 20);
+            this.textBoxHabitat.Size = new System.Drawing.Size(280, 20);
             this.textBoxHabitat.TabIndex = 7;
             // 
             // textBoxLatin_Title
             // 
             this.textBoxLatin_Title.Location = new System.Drawing.Point(127, 75);
             this.textBoxLatin_Title.Name = "textBoxLatin_Title";
-            this.textBoxLatin_Title.Size = new System.Drawing.Size(145, 20);
+            this.textBoxLatin_Title.Size = new System.Drawing.Size(256, 20);
             this.textBoxLatin_Title.TabIndex = 6;
             // 
             // textBoxTitle
             // 
             this.textBoxTitle.Location = new System.Drawing.Point(72, 49);
             this.textBoxTitle.Name = "textBoxTitle";
-            this.textBoxTitle.Size = new System.Drawing.Size(200, 20);
+            this.textBoxTitle.Size = new System.Drawing.Size(311, 20);
             this.textBoxTitle.TabIndex = 5;
             // 
             // labelProtection_Status
@@ -149,7 +151,7 @@
             this.panel2.Controls.Add(this.buttonUpdate);
             this.panel2.Controls.Add(this.buttonAdd);
             this.panel2.Controls.Add(this.buttonGet);
-            this.panel2.Location = new System.Drawing.Point(311, 12);
+            this.panel2.Location = new System.Drawing.Point(406, 12);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(151, 161);
             this.panel2.TabIndex = 9;
@@ -212,11 +214,21 @@
             this.labelResponseStatus.Size = new System.Drawing.Size(0, 13);
             this.labelResponseStatus.TabIndex = 9;
             // 
+            // buttonClearAnimal
+            // 
+            this.buttonClearAnimal.Location = new System.Drawing.Point(284, 9);
+            this.buttonClearAnimal.Name = "buttonClearAnimal";
+            this.buttonClearAnimal.Size = new System.Drawing.Size(79, 23);
+            this.buttonClearAnimal.TabIndex = 9;
+            this.buttonClearAnimal.Text = "Очистить";
+            this.buttonClearAnimal.UseVisualStyleBackColor = true;
+            this.buttonClearAnimal.Click += new System.EventHandler(this.buttonClearAnimal_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(474, 206);
+            this.ClientSize = new System.Drawing.Size(569, 206);
             this.Controls.Add(this.labelResponseStatus);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
@@ -250,6 +262,7 @@
         private System.Windows.Forms.Button buttonAdd;
         private System.Windows.Forms.Label labelResponseStatus;
         private System.Windows.Forms.Button buttonExit;
+        private System.Windows.Forms.Button buttonClearAnimal;
     }
 }
 
