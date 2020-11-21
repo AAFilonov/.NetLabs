@@ -2,6 +2,7 @@
 
 namespace ClassLibraryAnimals
 {
+    [Serializable]
     /// <summary>
     /// Животное
     /// </summary>

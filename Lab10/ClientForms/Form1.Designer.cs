@@ -30,6 +30,7 @@
         {
             this.labelAnimal = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.buttonClearAnimal = new System.Windows.Forms.Button();
             this.comboBoxProtectionStatus = new System.Windows.Forms.ComboBox();
             this.textBoxHabitat = new System.Windows.Forms.TextBox();
             this.textBoxLatin_Title = new System.Windows.Forms.TextBox();
@@ -45,7 +46,6 @@
             this.buttonAdd = new System.Windows.Forms.Button();
             this.buttonGet = new System.Windows.Forms.Button();
             this.labelResponseStatus = new System.Windows.Forms.Label();
-            this.buttonClearAnimal = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -77,6 +77,16 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(388, 161);
             this.panel1.TabIndex = 1;
+            // 
+            // buttonClearAnimal
+            // 
+            this.buttonClearAnimal.Location = new System.Drawing.Point(284, 9);
+            this.buttonClearAnimal.Name = "buttonClearAnimal";
+            this.buttonClearAnimal.Size = new System.Drawing.Size(79, 23);
+            this.buttonClearAnimal.TabIndex = 9;
+            this.buttonClearAnimal.Text = "Очистить";
+            this.buttonClearAnimal.UseVisualStyleBackColor = true;
+            this.buttonClearAnimal.Click += new System.EventHandler(this.buttonClearAnimal_Click);
             // 
             // comboBoxProtectionStatus
             // 
@@ -213,16 +223,6 @@
             this.labelResponseStatus.Name = "labelResponseStatus";
             this.labelResponseStatus.Size = new System.Drawing.Size(0, 13);
             this.labelResponseStatus.TabIndex = 9;
-            // 
-            // buttonClearAnimal
-            // 
-            this.buttonClearAnimal.Location = new System.Drawing.Point(284, 9);
-            this.buttonClearAnimal.Name = "buttonClearAnimal";
-            this.buttonClearAnimal.Size = new System.Drawing.Size(79, 23);
-            this.buttonClearAnimal.TabIndex = 9;
-            this.buttonClearAnimal.Text = "Очистить";
-            this.buttonClearAnimal.UseVisualStyleBackColor = true;
-            this.buttonClearAnimal.Click += new System.EventHandler(this.buttonClearAnimal_Click);
             // 
             // Form1
             // 

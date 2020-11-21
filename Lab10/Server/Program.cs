@@ -6,14 +6,24 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using ClassLibraryAnimals;
-using Newtonsoft.Json;
+using System.Text.Json;
+using System.IO;
+using System.Windows.Forms;
+using System.Timers;
 namespace Server
 {
     class Program
     {
         private static ConcurrentDictionary<string, Animal> _animals = new ConcurrentDictionary<string, Animal>();
+        static string SaveFile = "Animals.json";
         static void Main(string[] args)
         {
+
+
+       
+            LoadAnimals(SaveFile);
+            Task taskAutoSave = new Task(AutoSave);
+            taskAutoSave.Start();
             // Устанавливаем для сокета локальную конечную точку
             IPHostEntry ipHost = Dns.GetHostEntry("localhost");
             IPAddress ipAddr = ipHost.AddressList[0];
@@ -21,7 +31,7 @@ namespace Server
 
             // Создаем сокет Tcp/Ip
             Socket sListener = new Socket(ipAddr.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-
+    
             // Назначаем сокет локальной конечной точке и слушаем входящие сокеты
             try
             {
@@ -46,7 +56,21 @@ namespace Server
                 Console.ReadLine();
             }
         }
+        private static void AutoSave()
+        {
+            System.Timers.Timer aTimer;
+            // Create a timer with a two second interval.
+            aTimer = new System.Timers.Timer(10000);
+            // Hook up the Elapsed event for the timer. 
+            aTimer.Elapsed += OnTimedEvent;
+            aTimer.AutoReset = true;
+            aTimer.Enabled = true;
+            while (true)
+            {
 
+            }
+       
+        }
         private static void Action(object o)
         {
             Socket socket = o as Socket;
@@ -61,9 +85,10 @@ namespace Server
                         int bytesRec = socket.Receive(bytes);
                         string json = Encoding.UTF8.GetString(bytes, 0, bytesRec);
                         AnimalResponse response = new AnimalResponse { IsSuccess = false };
-try
-{
-                            var request = JsonConvert.DeserializeObject<AnimalRequest>(json);
+                        try
+                        {
+                          
+                            var request = JsonSerializer.Deserialize<AnimalRequest>(json);
                             if (request != null)
                             {
                                 response.Key = request.Key;
@@ -132,7 +157,7 @@ try
                         // Показываем данные на консоли
                         Console.WriteLine("Полученный json: " + json);
                         // Отправляем ответ клиенту\
-                        var jsonResponse = JsonConvert.SerializeObject(response);
+                        var jsonResponse = JsonSerializer.Serialize< AnimalResponse>(response);
                         byte[] msg = Encoding.UTF8.GetBytes(jsonResponse);
                         Console.Write("Отправленный json: " + jsonResponse);
                         socket.Send(msg);
@@ -145,6 +170,47 @@ try
                 socket.Shutdown(SocketShutdown.Both);
                 socket.Close();
             }
+        }
+        private static void OnTimedEvent(Object source, ElapsedEventArgs e)
+        {
+            SaveAnimals(SaveFile);
+            Console.WriteLine($"Коллекция животных автоматически сохранена в файл {SaveFile}\n");
+       
+        }
+        public static void SaveAnimals(string fileName)
+        {
+            var json = JsonSerializer.Serialize(_animals);
+          
+            using (StreamWriter sw = new StreamWriter(fileName, false, System.Text.Encoding.Default))
+            {
+                sw.WriteLine(json);
+            }
+        }
+        public static void LoadAnimals (string fileName)
+        {
+            string json;
+            try {
+                using (StreamReader sr = new StreamReader(fileName))
+                {
+                    json = sr.ReadToEnd();
+                }
+                try
+                {
+                    _animals = JsonSerializer.Deserialize<ConcurrentDictionary<string, Animal>>(json);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Ошибка десериализации файла {SaveFile}\n");
+    
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Не удалось открыть файл {SaveFile}\n");
+            }
+
+
+
         }
     }
 }

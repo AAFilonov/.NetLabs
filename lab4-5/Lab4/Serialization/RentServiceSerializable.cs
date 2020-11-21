@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Xml.Serialization;
-using Newtonsoft.Json;
+using System.Text.Json;
 
 namespace ClassLibraryRentService.Serialization
 {
