@@ -6,7 +6,7 @@ namespace ClassLibraryAnimals
 { /// <summary>
   /// Ответ от справочника животных
   /// </summary>
-    class AnimalResponse
+    public class AnimalResponse
     {
         /// <summary>
         /// Сообщение об ошибке
@@ -25,5 +25,6 @@ namespace ClassLibraryAnimals
         /// </summary>
         public Animal Animal { get; set; }
     }
+}
        
 

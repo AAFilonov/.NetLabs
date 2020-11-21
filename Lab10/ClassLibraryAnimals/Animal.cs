@@ -22,7 +22,7 @@ namespace ClassLibraryAnimals
         /// <summary>
         /// Охранный статус
         /// </summary>
-        public string Зrotection_Status { get; set; }
+        public string Protection_Status { get; set; }
         
     }
 }

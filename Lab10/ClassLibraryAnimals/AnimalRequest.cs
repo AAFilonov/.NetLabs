@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ClassLibraryAnimals
 {
-    class AnimalRequest
+    public class AnimalRequest
     {
         /// <summary>
         /// Тип запроса
