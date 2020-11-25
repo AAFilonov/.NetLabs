@@ -3,43 +3,23 @@
     {
       "ClientId": 1,
       "Fio": {
-        "FirstName": "Иван",
-        "MiddleName": "Иванович",
-        "LastName": "Иванов",
+        "FirstName": "a",
+        "MiddleName": "a",
+        "LastName": "a",
         "IsValid": true
       },
-      "Adress": "его адрес",
-      "PhoneNumber": "+1-231-231-23-12",
-      "IsValid": true
-    },
-    {
-      "ClientId": 2,
-      "Fio": {
-        "FirstName": "Петр",
-        "MiddleName": "Петрович",
-        "LastName": "Петров",
-        "IsValid": true
-      },
-      "Adress": "адрес петра",
-      "PhoneNumber": "+4-564-564-56-45",
+      "Adress": "a",
+      "PhoneNumber": "+1-   -   -  -",
       "IsValid": true
     }
   ],
   "Cars": [
     {
       "Number": 1,
-      "Mark": "Шкода1",
-      "Price": 100.0,
-      "PriceRent": 100.0,
+      "Mark": "asd",
+      "Price": 1.0,
+      "PriceRent": 1.0,
       "Type": 1,
-      "IsValid": true
-    },
-    {
-      "Number": 2,
-      "Mark": "Митсубиси",
-      "Price": 100.0,
-      "PriceRent": 100.0,
-      "Type": 0,
       "IsValid": true
     }
   ],
@@ -47,14 +27,8 @@
     {
       "CarId": 1,
       "ClientId": 1,
-      "StartDate": "2020-11-10T14:34:46.0341785+03:00",
-      "EndDate": "2020-11-28T14:34:46"
-    },
-    {
-      "CarId": 2,
-      "ClientId": 2,
-      "StartDate": "2020-11-02T14:34:56",
-      "EndDate": "2020-11-13T14:34:56"
+      "StartDate": "2020-11-25T12:26:04.5013552+03:00",
+      "EndDate": "2020-11-29T12:26:04"
     }
   ]
 }

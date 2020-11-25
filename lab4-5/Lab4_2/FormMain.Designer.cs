@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("");
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("");
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -265,8 +263,6 @@
             this.listViewClients.FullRowSelect = true;
             this.listViewClients.GridLines = true;
             this.listViewClients.HideSelection = false;
-            this.listViewClients.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1});
             this.listViewClients.Location = new System.Drawing.Point(3, 3);
             this.listViewClients.Name = "listViewClients";
             this.listViewClients.Size = new System.Drawing.Size(529, 271);
@@ -299,8 +295,6 @@
             this.listViewCars.FullRowSelect = true;
             this.listViewCars.GridLines = true;
             this.listViewCars.HideSelection = false;
-            this.listViewCars.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem2});
             this.listViewCars.Location = new System.Drawing.Point(3, 3);
             this.listViewCars.Name = "listViewCars";
             this.listViewCars.Size = new System.Drawing.Size(529, 271);

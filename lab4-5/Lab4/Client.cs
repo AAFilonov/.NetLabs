@@ -30,7 +30,7 @@ namespace ClassLibraryRentService
         /// <summary>
         /// Уникальный идентификатор клиента
         /// </summary>
-        public int ClientId { get; }
+        public int ClientId { get; set; }
 
         public FIO Fio { get; set; } = new FIO();
         /// <summary>
