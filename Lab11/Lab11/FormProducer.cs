@@ -35,5 +35,10 @@ namespace Lab11
             Producer.LastName = textBoxLastName.Text;
    
         }
+
+        private void FormProducer_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

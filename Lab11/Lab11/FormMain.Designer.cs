@@ -31,16 +31,17 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.tabControlMain = new System.Windows.Forms.TabControl();
             this.tabPageFilms = new System.Windows.Forms.TabPage();
+            this.pictureBoxCover = new System.Windows.Forms.PictureBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButtonLoad = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonAdd = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonUpdate = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonDelete = new System.Windows.Forms.ToolStripButton();
             this.listViewFilms = new System.Windows.Forms.ListView();
+            this.columnHeaderFilmID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderTitle = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderProdusser = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderYear = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeaderCover = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabPageProducers = new System.Windows.Forms.TabPage();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.toolStripButtonLoadProducer = new System.Windows.Forms.ToolStripButton();
@@ -48,11 +49,12 @@
             this.toolStripButtonUpdateProducer = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonDeleteProducer = new System.Windows.Forms.ToolStripButton();
             this.listViewProducers = new System.Windows.Forms.ListView();
+            this.columnHeaderID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderFirstName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderSecondName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeaderID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabControlMain.SuspendLayout();
             this.tabPageFilms.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCover)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.tabPageProducers.SuspendLayout();
             this.toolStrip2.SuspendLayout();
@@ -70,6 +72,7 @@
             // 
             // tabPageFilms
             // 
+            this.tabPageFilms.Controls.Add(this.pictureBoxCover);
             this.tabPageFilms.Controls.Add(this.toolStrip1);
             this.tabPageFilms.Controls.Add(this.listViewFilms);
             this.tabPageFilms.Location = new System.Drawing.Point(4, 22);
@@ -79,6 +82,15 @@
             this.tabPageFilms.TabIndex = 0;
             this.tabPageFilms.Text = "Фильмы";
             this.tabPageFilms.UseVisualStyleBackColor = true;
+            // 
+            // pictureBoxCover
+            // 
+            this.pictureBoxCover.Location = new System.Drawing.Point(530, 32);
+            this.pictureBoxCover.Name = "pictureBoxCover";
+            this.pictureBoxCover.Size = new System.Drawing.Size(149, 153);
+            this.pictureBoxCover.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxCover.TabIndex = 2;
+            this.pictureBoxCover.TabStop = false;
             // 
             // toolStrip1
             // 
@@ -135,40 +147,46 @@
             // 
             // listViewFilms
             // 
+            this.listViewFilms.AutoArrange = false;
             this.listViewFilms.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeaderFilmID,
             this.columnHeaderTitle,
             this.columnHeaderProdusser,
-            this.columnHeaderYear,
-            this.columnHeaderCover});
+            this.columnHeaderYear});
             this.listViewFilms.FullRowSelect = true;
             this.listViewFilms.GridLines = true;
             this.listViewFilms.HideSelection = false;
             this.listViewFilms.Location = new System.Drawing.Point(0, 26);
             this.listViewFilms.Name = "listViewFilms";
-            this.listViewFilms.Size = new System.Drawing.Size(682, 225);
+            this.listViewFilms.Size = new System.Drawing.Size(523, 219);
             this.listViewFilms.TabIndex = 0;
             this.listViewFilms.UseCompatibleStateImageBehavior = false;
             this.listViewFilms.View = System.Windows.Forms.View.Details;
+            this.listViewFilms.SelectedIndexChanged += new System.EventHandler(this.listViewFilms_SelectedIndexChanged);
+            // 
+            // columnHeaderFilmID
+            // 
+            this.columnHeaderFilmID.DisplayIndex = 3;
+            this.columnHeaderFilmID.Text = "ID";
+            this.columnHeaderFilmID.Width = 91;
             // 
             // columnHeaderTitle
             // 
+            this.columnHeaderTitle.DisplayIndex = 0;
             this.columnHeaderTitle.Text = "Название";
-            this.columnHeaderTitle.Width = 222;
+            this.columnHeaderTitle.Width = 174;
             // 
             // columnHeaderProdusser
             // 
+            this.columnHeaderProdusser.DisplayIndex = 1;
             this.columnHeaderProdusser.Text = "Режисер";
-            this.columnHeaderProdusser.Width = 175;
+            this.columnHeaderProdusser.Width = 126;
             // 
             // columnHeaderYear
             // 
+            this.columnHeaderYear.DisplayIndex = 2;
             this.columnHeaderYear.Text = "Год выхода";
-            this.columnHeaderYear.Width = 108;
-            // 
-            // columnHeaderCover
-            // 
-            this.columnHeaderCover.Text = "Обложка";
-            this.columnHeaderCover.Width = 161;
+            this.columnHeaderYear.Width = 134;
             // 
             // tabPageProducers
             // 
@@ -251,6 +269,11 @@
             this.listViewProducers.UseCompatibleStateImageBehavior = false;
             this.listViewProducers.View = System.Windows.Forms.View.Details;
             // 
+            // columnHeaderID
+            // 
+            this.columnHeaderID.DisplayIndex = 2;
+            this.columnHeaderID.Text = "ID";
+            // 
             // columnHeaderFirstName
             // 
             this.columnHeaderFirstName.DisplayIndex = 0;
@@ -263,11 +286,6 @@
             this.columnHeaderSecondName.Text = "Фамилия";
             this.columnHeaderSecondName.Width = 127;
             // 
-            // columnHeaderID
-            // 
-            this.columnHeaderID.DisplayIndex = 2;
-            this.columnHeaderID.Text = "ID";
-            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -276,9 +294,11 @@
             this.Controls.Add(this.tabControlMain);
             this.Name = "FormMain";
             this.Text = "Фильмотека";
+            this.Load += new System.EventHandler(this.FormMain_Load);
             this.tabControlMain.ResumeLayout(false);
             this.tabPageFilms.ResumeLayout(false);
             this.tabPageFilms.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCover)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.tabPageProducers.ResumeLayout(false);
@@ -290,16 +310,11 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.TabControl tabControlMain;
         private System.Windows.Forms.TabPage tabPageFilms;
-        private System.Windows.Forms.ListView listViewFilms;
         private System.Windows.Forms.ColumnHeader columnHeaderTitle;
         private System.Windows.Forms.ColumnHeader columnHeaderProdusser;
         private System.Windows.Forms.ColumnHeader columnHeaderYear;
-        private System.Windows.Forms.ColumnHeader columnHeaderCover;
         private System.Windows.Forms.TabPage tabPageProducers;
-        private System.Windows.Forms.ListView listViewProducers;
         private System.Windows.Forms.ColumnHeader columnHeaderFirstName;
         private System.Windows.Forms.ColumnHeader columnHeaderSecondName;
         private System.Windows.Forms.ToolStrip toolStrip1;
@@ -313,6 +328,11 @@
         private System.Windows.Forms.ToolStripButton toolStripButtonUpdateProducer;
         private System.Windows.Forms.ToolStripButton toolStripButtonDeleteProducer;
         private System.Windows.Forms.ColumnHeader columnHeaderID;
+        private System.Windows.Forms.ColumnHeader columnHeaderFilmID;
+        internal System.Windows.Forms.TabControl tabControlMain;
+        internal System.Windows.Forms.ListView listViewFilms;
+        public System.Windows.Forms.ListView listViewProducers;
+        private System.Windows.Forms.PictureBox pictureBoxCover;
     }
 }
 

@@ -90,6 +90,7 @@
             this.Controls.Add(this.textBoxFirstName);
             this.Name = "FormProducer";
             this.Text = "FormProducer";
+            this.Load += new System.EventHandler(this.FormProducer_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
