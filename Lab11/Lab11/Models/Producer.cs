@@ -4,16 +4,16 @@ using System.Data.SqlClient;
 
 namespace Lab11.Models
 {
-    class Producer
+    public class Producer
     {
-        private static readonly string _selectProducersCommand = @"SELECT [id], [FirstName],[SecondName] FROM [DB_dotNet].[dbo].[Producer]";
-        private static readonly string _insertProducerCommand = @"INSERT INTO [DB_dotNet].[dbo].[Producer] VALUES (@id,@firstName,@secondName)";
-        private static readonly string _updateProducerCommand = @"UPDATE [DB_dotNet].[dbo].[Producer] set [id] = @id,= [FirstName] @firstName,[SecondName]  = @secondName)";
+        private static readonly string _selectProducersCommand = @"SELECT [id], [FirstName],[LastName] FROM [DB_dotNet].[dbo].[Producer]";
+        private static readonly string _insertProducerCommand = @"INSERT INTO [DB_dotNet].[dbo].[Producer] VALUES (@firstName,@lastName)";
+        private static readonly string _updateProducerCommand = @"UPDATE [DB_dotNet].[dbo].[Producer] set  [FirstName] = @firstName,[LastName]  = @lastName  WHERE [id] = @id";
         private static readonly string _deleteProducerCommand = @"DELETE FROM [DB_dotNet].[dbo].[Producer] WHERE [id] = @id";
        
         public int Id { get; set; }
         public string FirstName { get; set; }
-        public string SecondName { get; set; }
+        public string LastName { get; set; }
 
         public static List<Producer> List(SqlConnection connection)
         {
@@ -31,8 +31,9 @@ namespace Lab11.Models
                     {
                         Producer producer = new Producer
                         {
+                            Id = (int)reader["id"],
                             FirstName = (string)reader["FirstName"],
-                            SecondName = (string)reader["SecondName"],
+                            LastName = (string)reader["LastName"],
                         };
                         Produssers.Add(producer);
                     }
@@ -53,9 +54,10 @@ namespace Lab11.Models
                 {
                     command.Connection = connection;
                     command.CommandText = _insertProducerCommand;
-                    command.CommandType = CommandType.Text;
+                    command.CommandType = CommandType.Text;              
+                   
                     command.Parameters.Add("@FirstName", SqlDbType.NVarChar, 32).Value = producer.FirstName;
-                    command.Parameters.Add("@SecondName", SqlDbType.NVarChar, 32).Value = producer.SecondName;
+                    command.Parameters.Add("@LastName", SqlDbType.NVarChar, 32).Value = producer.LastName;
   
                     connection.Open();
                     command.ExecuteNonQuery();
@@ -76,9 +78,10 @@ namespace Lab11.Models
                     command.Connection = connection;
                     command.CommandText = _updateProducerCommand;
                     command.CommandType = CommandType.Text;
-                    command.Parameters.Add("@FirstName", SqlDbType.NVarChar, 32).Value = producer.FirstName;
-                    command.Parameters.Add("@SecondName", SqlDbType.NVarChar, 32).Value = producer.SecondName;
                     command.Parameters.Add("@id", SqlDbType.Int).Value = producer.Id;
+                    command.Parameters.Add("@FirstName", SqlDbType.NVarChar, 32).Value = producer.FirstName;
+                    command.Parameters.Add("@LastName", SqlDbType.NVarChar, 32).Value = producer.LastName;
+            
                     connection.Open();
                     command.ExecuteNonQuery();
                 }

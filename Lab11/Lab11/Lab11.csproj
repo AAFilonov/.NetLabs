@@ -58,6 +58,12 @@
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormProducer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormProducer.Designer.cs">
+      <DependentUpon>FormProducer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Film.cs" />
     <Compile Include="Models\Producer.cs" />
     <Compile Include="Program.cs" />
@@ -67,6 +73,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormProducer.resx">
+      <DependentUpon>FormProducer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
