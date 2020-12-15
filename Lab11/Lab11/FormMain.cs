@@ -11,6 +11,8 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using Lab11.Models;
+using System.Drawing.Printing;
+using System.IO;
 
 namespace Lab11
 {
@@ -20,169 +22,148 @@ namespace Lab11
         public FormMain()
         {
             InitializeComponent();
-           /* _connection = new SqlConnection("Data Source=.\\MSSQLSERVER01;" +
-  "Initial Catalog=DB_dotNet;Integrated Security=True;" +
-  "Trusted_Connection=True;Persist Security Info=False;" +
-  "Pooling=False;MultipleActiveResultSets=False;" +
-  "Encrypt=False;TrustServerCertificate=True");*/
-            _connection = new SqlConnection("Data Source=localhost;Initial Catalog=DB_dotNet;Integrated Security=True;Persist Security Info=False;Pooling=False;MultipleActiveResultSets=False;Encrypt=False;TrustServerCertificate=True");
         }
+        private Font PrintFont;
 
-
-        private void toolStripButtonLoadProducer_Click(object sender, EventArgs e)
+        private void filmssBindingNavigatorSaveItem_Click(object sender, EventArgs e)
         {
-            var Producers = Producer.List(_connection);
-            listViewProducers.Items.Clear();
-            for (int i = 0; i < Producers.Count; i++)
-            {
-                var p = Producers[i];
-                ListViewItem listListViewItem = new ListViewItem(p.Id.ToString()); 
-                listListViewItem.Tag = p;
-                listListViewItem.SubItems.Add(p.FirstName);
-                listListViewItem.SubItems.Add(p.LastName);
-                listViewProducers.Items.Add(listListViewItem);
-            }
-
-        }
-        private void toolStripButtonAddProducer_Click(object sender, EventArgs e)
-        {
-            FormProducer formProducer = new FormProducer()
-            {
-                Producer = new Producer()
-            };
-            if (formProducer.ShowDialog() == DialogResult.OK)
-            {
-            
-                Producer.Insert(_connection, formProducer.Producer);
-            }
-        }
-        private void toolStripButtonUpdateProducer_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                FormProducer formProducer = new FormProducer
-                {
-                    Producer = (Producer)listViewProducers.SelectedItems[0].Tag
-                };
-                if (formProducer.ShowDialog() == DialogResult.OK)
-                {
-                   
-                    listViewProducers.SelectedItems[0].SubItems[1].Text = formProducer.Producer.FirstName;
-                    listViewProducers.SelectedItems[0].SubItems[2].Text = formProducer.Producer.LastName;
-                    Producer.Update(_connection, formProducer.Producer);
-                }
-            }
-            catch (System.ArgumentOutOfRangeException ex )
-            {
-                MessageBox.Show("Аргумент не выбран","Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            }
-            catch(System.Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-      
-        private void toolStripButtonDeleteProducer_Click(object sender, EventArgs e)
-        {               
-                Producer.Delete(_connection, ((Producer)listViewProducers.SelectedItems[0].Tag).Id);
-            listViewProducers.Items.Remove(listViewProducers.SelectedItems[0]);
-        }
-        private void toolStripButtonLoad_Click(object sender, System.EventArgs e)
-        {
-            var Films = Film.List(_connection);
-            listViewFilms.Items.Clear();
-            for (int i = 0; i < Films.Count; i++)
-            {
-                var Film = Films[i];
-                ListViewItem listListViewItem = new ListViewItem(Film.FilmId.ToString());               
-                listListViewItem.Tag = Film;
-                listListViewItem.SubItems.Add(Film.Title);              
-                listListViewItem.SubItems.Add(Film.ProdusserId.ToString());
-                listListViewItem.SubItems.Add(Film.Year.ToString());
-                listViewFilms.Items.Add(listListViewItem);
-            }
-        }
-        
-
-        private void toolStripButtonAdd_Click(object sender, EventArgs e)
-        {
-            FormFilm formFilm = new FormFilm()
-            {
-                Film = new Film()
-            };
-            if (formFilm.ShowDialog() == DialogResult.OK)
-            {
-                ListViewItem listListViewItem = new ListViewItem(formFilm.Film.FilmId.ToString());
-                listListViewItem.Tag = formFilm.Film;
-                listListViewItem.SubItems.Add(formFilm.Film.Title);
-                listListViewItem.SubItems.Add(formFilm.Film.ProdusserId.ToString());
-                listListViewItem.SubItems.Add(formFilm.Film.Year.ToString());
-                listViewFilms.Items.Add(listListViewItem);
-                listViewFilms.SelectedItems.Clear();
-                listViewFilms.Items[listViewFilms.Items.Count - 1].Selected = true;
-
-
-               Film.Insert(_connection, formFilm.Film);
-            }
-        }
-
-        private void toolStripButtonUpdate_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                FormFilm formFilm = new FormFilm()
-                {
-                    Film = (Film)listViewFilms.SelectedItems[0].Tag
-                };
-                if (formFilm.ShowDialog() == DialogResult.OK)
-                {
-
-                    listViewFilms.SelectedItems[0].SubItems[1].Text = formFilm.Film.Title;
-                    listViewFilms.SelectedItems[0].SubItems[2].Text = formFilm.Film.ProdusserId.ToString();
-                    listViewFilms.SelectedItems[0].SubItems[3].Text = formFilm.Film.Year.ToString();
-                    Film.Update(_connection, formFilm.Film);
-                }
-            }
-            catch (System.ArgumentOutOfRangeException ex)
-            {
-                MessageBox.Show("Аргумент не выбран", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            }
-            catch (System.Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            }
-        }
-
-        private void toolStripButtonDelete_Click(object sender, EventArgs e)
-        {
-            Film.Delete(_connection, ((Film)listViewFilms.SelectedItems[0].Tag).FilmId);
-        }
-
-        private void listViewFilms_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if(listViewFilms.SelectedItems.Count!=0)
-            pictureBoxCover.Image = ((Film)listViewFilms.SelectedItems[0].Tag).Cover;
-
-
-
-
+            this.Validate();
+            this.teachersBindingSource.EndEdit();
+            this.tableAdapterManager.UpdateAll(this.Lab11dbDataSet);
 
         }
 
         private void FormMain_Load(object sender, EventArgs e)
         {
-            // TODO: данная строка кода позволяет загрузить данные в таблицу "dB_dotNetDataSet.Producer". При необходимости она может быть перемещена или удалена.
-            this.producerTableAdapter.Fill(this.dB_dotNetDataSet.Producer);
-            // TODO: данная строка кода позволяет загрузить данные в таблицу "dB_dotNetDataSet.Film". При необходимости она может быть перемещена или удалена.
-            this.filmTableAdapter.Fill(this.dB_dotNetDataSet.Film);
+
             // TODO: данная строка кода позволяет загрузить данные в таблицу "dB_dotNetDataSet.Film". При необходимости она может быть перемещена или удалена.
             this.filmTableAdapter.Fill(this.dB_dotNetDataSet.Film);
             // TODO: данная строка кода позволяет загрузить данные в таблицу "dB_dotNetDataSet.Producer". При необходимости она может быть перемещена или удалена.
             this.producerTableAdapter.Fill(this.dB_dotNetDataSet.Producer);
-            toolStripButtonLoadProducer_Click(null,null);
+ 
+        }
+
+        private void filmsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void addToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void editToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void saveToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            filmTableAdapter.Update(dB_dotNetDataSet.Film);
+            producerTableAdapter.Update(dB_dotNetDataSet.Producer);
+        }
+
+        private void printToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Printing();
+        }
+
+       
+        private void previewToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PrintingPreview();
+        }
+
+        private void dataGridView2_DoubleClick(object sender, EventArgs e)
+        {
+            var form = new FormFilm(filmBindingSource.Position);
+            form.ShowDialog();
+            filmTableAdapter.Fill(dB_dotNetDataSet.Film);
+        }
+        private void teachersBindingNavigatorSaveItem_Click(object sender, EventArgs e)
+        {
+            this.Validate();
+            this.filmBindingSource.EndEdit();
+            this.tableAdapterManager.UpdateAll(this.Lab11dbDataSet);
+
+        }
+
+        private void pd_PrintSingle(object sender, PrintPageEventArgs ev)
+        {
+            float leftMargin = ev.MarginBounds.Left;
+            float yPos = ev.MarginBounds.Top;
+            string line;
+            DataRowView dataRowView = (DataRowView)teachersBindingSource.Current;
+            dB_dotNetDataSet.filmrow row = (lab11dbDataSet.teachersRow)dataRowView.Row;
+
+            PrintFont = new Font("Arial", 20, FontStyle.Bold);
+            line = "Teacher record report:";
+            ev.Graphics.DrawString(line, PrintFont, Brushes.Black, leftMargin, yPos, new StringFormat());
+            yPos += PrintFont.GetHeight(ev.Graphics);
+
+
+            PrintFont = new Font("Arial", 14);
+            line = $"ID = {row.id}\r\n" +
+                   $"FIRST NAME = {row.first_name}\r\n" +
+                   $"MIDDLE_NAME = {row.middle_name}\r\n" +
+                   $"LAST_NAME = {row.last_name}\r\n" +
+                   $"DEGREE = {row.degreesRow.id}";
+
+            ev.Graphics.DrawString(line, PrintFont, Brushes.Black, leftMargin, yPos, new StringFormat());
+            yPos += PrintFont.GetHeight(ev.Graphics) * 10;
+
+
+            try
+            {
+                using (var ms = new MemoryStream(row.photo))
+                {
+                    ev.Graphics.DrawImage(Image.FromStream(ms), new Point((int)leftMargin, (int)yPos));
+                }
+            }
+            catch (Exception)
+            { }
+
+            ev.HasMorePages = false;
+        }
+
+        public void Printing()
+        {
+            try
+            {
+                PrintDocument pd = new PrintDocument();
+                pd.PrintPage += new PrintPageEventHandler(pd_PrintSingle);
+                // Print the document.
+                pd.Print();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        public void PrintingPreview()
+        {
+            try
+            {
+                PrintPreviewDialog preview = new PrintPreviewDialog();
+                PrintDocument pd = new PrintDocument();
+                pd.PrintPage += new PrintPageEventHandler(pd_PrintSingle);
+                preview.Document = pd;
+                preview.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
-      
     
+
+
 }
