@@ -46,6 +46,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DB_dotNetDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DB_dotNetDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="FormFilm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -86,6 +91,17 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="DB_dotNetDataSet.xsc">
+      <DependentUpon>DB_dotNetDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="DB_dotNetDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DB_dotNetDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DB_dotNetDataSet.xss">
+      <DependentUpon>DB_dotNetDataSet.xsd</DependentUpon>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

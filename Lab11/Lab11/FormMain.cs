@@ -20,7 +20,11 @@ namespace Lab11
         public FormMain()
         {
             InitializeComponent();
-          
+           /* _connection = new SqlConnection("Data Source=.\\MSSQLSERVER01;" +
+  "Initial Catalog=DB_dotNet;Integrated Security=True;" +
+  "Trusted_Connection=True;Persist Security Info=False;" +
+  "Pooling=False;MultipleActiveResultSets=False;" +
+  "Encrypt=False;TrustServerCertificate=True");*/
             _connection = new SqlConnection("Data Source=localhost;Initial Catalog=DB_dotNet;Integrated Security=True;Persist Security Info=False;Pooling=False;MultipleActiveResultSets=False;Encrypt=False;TrustServerCertificate=True");
         }
 
@@ -103,7 +107,7 @@ namespace Lab11
 
         private void toolStripButtonAdd_Click(object sender, EventArgs e)
         {
-            FormFilm formFilm = new FormFilm(listViewProducers.Items.Count)
+            FormFilm formFilm = new FormFilm()
             {
                 Film = new Film()
             };
@@ -127,7 +131,7 @@ namespace Lab11
         {
             try
             {
-                FormFilm formFilm = new FormFilm(listViewProducers.Items.Count)
+                FormFilm formFilm = new FormFilm()
                 {
                     Film = (Film)listViewFilms.SelectedItems[0].Tag
                 };
@@ -159,10 +163,23 @@ namespace Lab11
         {
             if(listViewFilms.SelectedItems.Count!=0)
             pictureBoxCover.Image = ((Film)listViewFilms.SelectedItems[0].Tag).Cover;
+
+
+
+
+
         }
 
         private void FormMain_Load(object sender, EventArgs e)
         {
+            // TODO: данная строка кода позволяет загрузить данные в таблицу "dB_dotNetDataSet.Producer". При необходимости она может быть перемещена или удалена.
+            this.producerTableAdapter.Fill(this.dB_dotNetDataSet.Producer);
+            // TODO: данная строка кода позволяет загрузить данные в таблицу "dB_dotNetDataSet.Film". При необходимости она может быть перемещена или удалена.
+            this.filmTableAdapter.Fill(this.dB_dotNetDataSet.Film);
+            // TODO: данная строка кода позволяет загрузить данные в таблицу "dB_dotNetDataSet.Film". При необходимости она может быть перемещена или удалена.
+            this.filmTableAdapter.Fill(this.dB_dotNetDataSet.Film);
+            // TODO: данная строка кода позволяет загрузить данные в таблицу "dB_dotNetDataSet.Producer". При необходимости она может быть перемещена или удалена.
+            this.producerTableAdapter.Fill(this.dB_dotNetDataSet.Producer);
             toolStripButtonLoadProducer_Click(null,null);
         }
     }

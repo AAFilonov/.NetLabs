@@ -28,269 +28,240 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
+            this.components = new System.ComponentModel.Container();
             this.tabControlMain = new System.Windows.Forms.TabControl();
             this.tabPageFilms = new System.Windows.Forms.TabPage();
-            this.pictureBoxCover = new System.Windows.Forms.PictureBox();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButtonLoad = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonAdd = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonUpdate = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonDelete = new System.Windows.Forms.ToolStripButton();
-            this.listViewFilms = new System.Windows.Forms.ListView();
-            this.columnHeaderFilmID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeaderTitle = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeaderProdusser = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeaderYear = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.filmBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dBdotNetDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dB_dotNetDataSet = new Lab11.DB_dotNetDataSet();
             this.tabPageProducers = new System.Windows.Forms.TabPage();
-            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButtonLoadProducer = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonAddProducer = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonUpdateProducer = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonDeleteProducer = new System.Windows.Forms.ToolStripButton();
-            this.listViewProducers = new System.Windows.Forms.ListView();
-            this.columnHeaderID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeaderFirstName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeaderSecondName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.producerBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.filmTableAdapter = new Lab11.DB_dotNetDataSetTableAdapters.FilmTableAdapter();
+            this.producerTableAdapter = new Lab11.DB_dotNetDataSetTableAdapters.ProducerTableAdapter();
+            this.idDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.firstNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lastNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pictureBoxCover = new System.Windows.Forms.PictureBox();
+            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.titleDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.producerDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.yearDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.coverDataGridViewImageColumn = new System.Windows.Forms.DataGridViewImageColumn();
+            this.labelCover = new System.Windows.Forms.Label();
+            this.contextMenuStripPircturebox = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItemLoad = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemSave = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemOptions = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControlMain.SuspendLayout();
             this.tabPageFilms.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCover)).BeginInit();
-            this.toolStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.filmBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dBdotNetDataSetBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dB_dotNetDataSet)).BeginInit();
             this.tabPageProducers.SuspendLayout();
-            this.toolStrip2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.producerBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCover)).BeginInit();
+            this.contextMenuStripPircturebox.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControlMain
             // 
             this.tabControlMain.Controls.Add(this.tabPageFilms);
             this.tabControlMain.Controls.Add(this.tabPageProducers);
-            this.tabControlMain.Location = new System.Drawing.Point(12, 12);
+            this.tabControlMain.Location = new System.Drawing.Point(12, 27);
             this.tabControlMain.Name = "tabControlMain";
             this.tabControlMain.SelectedIndex = 0;
-            this.tabControlMain.Size = new System.Drawing.Size(693, 274);
+            this.tabControlMain.Size = new System.Drawing.Size(739, 442);
             this.tabControlMain.TabIndex = 0;
             // 
             // tabPageFilms
             // 
+            this.tabPageFilms.Controls.Add(this.labelCover);
+            this.tabPageFilms.Controls.Add(this.dataGridView2);
             this.tabPageFilms.Controls.Add(this.pictureBoxCover);
-            this.tabPageFilms.Controls.Add(this.toolStrip1);
-            this.tabPageFilms.Controls.Add(this.listViewFilms);
             this.tabPageFilms.Location = new System.Drawing.Point(4, 22);
             this.tabPageFilms.Name = "tabPageFilms";
             this.tabPageFilms.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageFilms.Size = new System.Drawing.Size(685, 248);
+            this.tabPageFilms.Size = new System.Drawing.Size(731, 416);
             this.tabPageFilms.TabIndex = 0;
             this.tabPageFilms.Text = "Фильмы";
             this.tabPageFilms.UseVisualStyleBackColor = true;
             // 
+            // dataGridView2
+            // 
+            this.dataGridView2.AllowUserToOrderColumns = true;
+            this.dataGridView2.AutoGenerateColumns = false;
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.idDataGridViewTextBoxColumn,
+            this.titleDataGridViewTextBoxColumn,
+            this.producerDataGridViewTextBoxColumn,
+            this.yearDataGridViewTextBoxColumn,
+            this.coverDataGridViewImageColumn});
+            this.dataGridView2.DataSource = this.filmBindingSource;
+            this.dataGridView2.Location = new System.Drawing.Point(6, 6);
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.Size = new System.Drawing.Size(564, 404);
+            this.dataGridView2.TabIndex = 3;
+            // 
+            // filmBindingSource
+            // 
+            this.filmBindingSource.DataMember = "Film";
+            this.filmBindingSource.DataSource = this.dBdotNetDataSetBindingSource;
+            // 
+            // dBdotNetDataSetBindingSource
+            // 
+            this.dBdotNetDataSetBindingSource.DataSource = this.dB_dotNetDataSet;
+            this.dBdotNetDataSetBindingSource.Position = 0;
+            // 
+            // dB_dotNetDataSet
+            // 
+            this.dB_dotNetDataSet.DataSetName = "DB_dotNetDataSet";
+            this.dB_dotNetDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // tabPageProducers
+            // 
+            this.tabPageProducers.Controls.Add(this.dataGridView1);
+            this.tabPageProducers.Location = new System.Drawing.Point(4, 22);
+            this.tabPageProducers.Name = "tabPageProducers";
+            this.tabPageProducers.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageProducers.Size = new System.Drawing.Size(685, 416);
+            this.tabPageProducers.TabIndex = 1;
+            this.tabPageProducers.Text = "Режисеры";
+            this.tabPageProducers.UseVisualStyleBackColor = true;
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AutoGenerateColumns = false;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.idDataGridViewTextBoxColumn1,
+            this.firstNameDataGridViewTextBoxColumn,
+            this.lastNameDataGridViewTextBoxColumn});
+            this.dataGridView1.DataSource = this.producerBindingSource;
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView1.Location = new System.Drawing.Point(3, 3);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(679, 410);
+            this.dataGridView1.TabIndex = 3;
+            // 
+            // producerBindingSource
+            // 
+            this.producerBindingSource.DataMember = "Producer";
+            this.producerBindingSource.DataSource = this.dBdotNetDataSetBindingSource;
+            // 
+            // filmTableAdapter
+            // 
+            this.filmTableAdapter.ClearBeforeFill = true;
+            // 
+            // producerTableAdapter
+            // 
+            this.producerTableAdapter.ClearBeforeFill = true;
+            // 
+            // idDataGridViewTextBoxColumn1
+            // 
+            this.idDataGridViewTextBoxColumn1.DataPropertyName = "id";
+            this.idDataGridViewTextBoxColumn1.HeaderText = "id";
+            this.idDataGridViewTextBoxColumn1.Name = "idDataGridViewTextBoxColumn1";
+            this.idDataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // firstNameDataGridViewTextBoxColumn
+            // 
+            this.firstNameDataGridViewTextBoxColumn.DataPropertyName = "FirstName";
+            this.firstNameDataGridViewTextBoxColumn.HeaderText = "FirstName";
+            this.firstNameDataGridViewTextBoxColumn.Name = "firstNameDataGridViewTextBoxColumn";
+            // 
+            // lastNameDataGridViewTextBoxColumn
+            // 
+            this.lastNameDataGridViewTextBoxColumn.DataPropertyName = "LastName";
+            this.lastNameDataGridViewTextBoxColumn.HeaderText = "LastName";
+            this.lastNameDataGridViewTextBoxColumn.Name = "lastNameDataGridViewTextBoxColumn";
+            // 
             // pictureBoxCover
             // 
-            this.pictureBoxCover.Location = new System.Drawing.Point(530, 32);
+            this.pictureBoxCover.ContextMenuStrip = this.contextMenuStripPircturebox;
+            this.pictureBoxCover.Location = new System.Drawing.Point(576, 29);
             this.pictureBoxCover.Name = "pictureBoxCover";
             this.pictureBoxCover.Size = new System.Drawing.Size(149, 153);
             this.pictureBoxCover.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxCover.TabIndex = 2;
             this.pictureBoxCover.TabStop = false;
             // 
-            // toolStrip1
+            // idDataGridViewTextBoxColumn
             // 
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButtonLoad,
-            this.toolStripButtonAdd,
-            this.toolStripButtonUpdate,
-            this.toolStripButtonDelete});
-            this.toolStrip1.Location = new System.Drawing.Point(3, 3);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(679, 25);
-            this.toolStrip1.TabIndex = 1;
-            this.toolStrip1.Text = "toolStripFilms";
+            this.idDataGridViewTextBoxColumn.DataPropertyName = "id";
+            this.idDataGridViewTextBoxColumn.HeaderText = "id";
+            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            this.idDataGridViewTextBoxColumn.ReadOnly = true;
             // 
-            // toolStripButtonLoad
+            // titleDataGridViewTextBoxColumn
             // 
-            this.toolStripButtonLoad.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButtonLoad.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonLoad.Image")));
-            this.toolStripButtonLoad.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonLoad.Name = "toolStripButtonLoad";
-            this.toolStripButtonLoad.Size = new System.Drawing.Size(65, 22);
-            this.toolStripButtonLoad.Text = "Загрузить";
-            this.toolStripButtonLoad.Click += new System.EventHandler(this.toolStripButtonLoad_Click);
+            this.titleDataGridViewTextBoxColumn.DataPropertyName = "Title";
+            this.titleDataGridViewTextBoxColumn.HeaderText = "Title";
+            this.titleDataGridViewTextBoxColumn.Name = "titleDataGridViewTextBoxColumn";
             // 
-            // toolStripButtonAdd
+            // producerDataGridViewTextBoxColumn
             // 
-            this.toolStripButtonAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButtonAdd.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonAdd.Image")));
-            this.toolStripButtonAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonAdd.Name = "toolStripButtonAdd";
-            this.toolStripButtonAdd.Size = new System.Drawing.Size(63, 22);
-            this.toolStripButtonAdd.Text = "Добавить";
-            this.toolStripButtonAdd.Click += new System.EventHandler(this.toolStripButtonAdd_Click);
+            this.producerDataGridViewTextBoxColumn.DataPropertyName = "producer";
+            this.producerDataGridViewTextBoxColumn.HeaderText = "producer";
+            this.producerDataGridViewTextBoxColumn.Name = "producerDataGridViewTextBoxColumn";
             // 
-            // toolStripButtonUpdate
+            // yearDataGridViewTextBoxColumn
             // 
-            this.toolStripButtonUpdate.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButtonUpdate.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonUpdate.Image")));
-            this.toolStripButtonUpdate.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonUpdate.Name = "toolStripButtonUpdate";
-            this.toolStripButtonUpdate.Size = new System.Drawing.Size(65, 22);
-            this.toolStripButtonUpdate.Text = "Обновить";
-            this.toolStripButtonUpdate.Click += new System.EventHandler(this.toolStripButtonUpdate_Click);
+            this.yearDataGridViewTextBoxColumn.DataPropertyName = "year";
+            this.yearDataGridViewTextBoxColumn.HeaderText = "year";
+            this.yearDataGridViewTextBoxColumn.Name = "yearDataGridViewTextBoxColumn";
             // 
-            // toolStripButtonDelete
+            // coverDataGridViewImageColumn
             // 
-            this.toolStripButtonDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButtonDelete.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonDelete.Image")));
-            this.toolStripButtonDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonDelete.Name = "toolStripButtonDelete";
-            this.toolStripButtonDelete.Size = new System.Drawing.Size(55, 22);
-            this.toolStripButtonDelete.Text = "Удалить";
-            this.toolStripButtonDelete.Click += new System.EventHandler(this.toolStripButtonDelete_Click);
+            this.coverDataGridViewImageColumn.DataPropertyName = "cover";
+            this.coverDataGridViewImageColumn.HeaderText = "cover";
+            this.coverDataGridViewImageColumn.Name = "coverDataGridViewImageColumn";
             // 
-            // listViewFilms
+            // labelCover
             // 
-            this.listViewFilms.AutoArrange = false;
-            this.listViewFilms.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeaderFilmID,
-            this.columnHeaderTitle,
-            this.columnHeaderProdusser,
-            this.columnHeaderYear});
-            this.listViewFilms.FullRowSelect = true;
-            this.listViewFilms.GridLines = true;
-            this.listViewFilms.HideSelection = false;
-            this.listViewFilms.Location = new System.Drawing.Point(0, 26);
-            this.listViewFilms.Name = "listViewFilms";
-            this.listViewFilms.Size = new System.Drawing.Size(523, 219);
-            this.listViewFilms.TabIndex = 0;
-            this.listViewFilms.UseCompatibleStateImageBehavior = false;
-            this.listViewFilms.View = System.Windows.Forms.View.Details;
-            this.listViewFilms.SelectedIndexChanged += new System.EventHandler(this.listViewFilms_SelectedIndexChanged);
+            this.labelCover.AutoSize = true;
+            this.labelCover.Location = new System.Drawing.Point(622, 185);
+            this.labelCover.Name = "labelCover";
+            this.labelCover.Size = new System.Drawing.Size(53, 13);
+            this.labelCover.TabIndex = 4;
+            this.labelCover.Text = "Обложка";
             // 
-            // columnHeaderFilmID
+            // contextMenuStripPircturebox
             // 
-            this.columnHeaderFilmID.DisplayIndex = 3;
-            this.columnHeaderFilmID.Text = "ID";
-            this.columnHeaderFilmID.Width = 91;
+            this.contextMenuStripPircturebox.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemLoad,
+            this.toolStripMenuItemSave,
+            this.toolStripMenuItemOptions});
+            this.contextMenuStripPircturebox.Name = "contextMenuStripPircturebox";
+            this.contextMenuStripPircturebox.Size = new System.Drawing.Size(182, 70);
             // 
-            // columnHeaderTitle
+            // toolStripMenuItemLoad
             // 
-            this.columnHeaderTitle.DisplayIndex = 0;
-            this.columnHeaderTitle.Text = "Название";
-            this.columnHeaderTitle.Width = 174;
+            this.toolStripMenuItemLoad.Name = "toolStripMenuItemLoad";
+            this.toolStripMenuItemLoad.Size = new System.Drawing.Size(181, 22);
+            this.toolStripMenuItemLoad.Text = "Загрузить из файла";
             // 
-            // columnHeaderProdusser
+            // toolStripMenuItemSave
             // 
-            this.columnHeaderProdusser.DisplayIndex = 1;
-            this.columnHeaderProdusser.Text = "Режисер";
-            this.columnHeaderProdusser.Width = 126;
+            this.toolStripMenuItemSave.Name = "toolStripMenuItemSave";
+            this.toolStripMenuItemSave.Size = new System.Drawing.Size(181, 22);
+            this.toolStripMenuItemSave.Text = "Сохранить в файл";
             // 
-            // columnHeaderYear
+            // toolStripMenuItemOptions
             // 
-            this.columnHeaderYear.DisplayIndex = 2;
-            this.columnHeaderYear.Text = "Год выхода";
-            this.columnHeaderYear.Width = 134;
-            // 
-            // tabPageProducers
-            // 
-            this.tabPageProducers.Controls.Add(this.toolStrip2);
-            this.tabPageProducers.Controls.Add(this.listViewProducers);
-            this.tabPageProducers.Location = new System.Drawing.Point(4, 22);
-            this.tabPageProducers.Name = "tabPageProducers";
-            this.tabPageProducers.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageProducers.Size = new System.Drawing.Size(685, 248);
-            this.tabPageProducers.TabIndex = 1;
-            this.tabPageProducers.Text = "Режисеры";
-            this.tabPageProducers.UseVisualStyleBackColor = true;
-            // 
-            // toolStrip2
-            // 
-            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButtonLoadProducer,
-            this.toolStripButtonAddProducer,
-            this.toolStripButtonUpdateProducer,
-            this.toolStripButtonDeleteProducer});
-            this.toolStrip2.Location = new System.Drawing.Point(3, 3);
-            this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(679, 25);
-            this.toolStrip2.TabIndex = 2;
-            this.toolStrip2.Text = "toolStripProducers";
-            // 
-            // toolStripButtonLoadProducer
-            // 
-            this.toolStripButtonLoadProducer.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButtonLoadProducer.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonLoadProducer.Image")));
-            this.toolStripButtonLoadProducer.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonLoadProducer.Name = "toolStripButtonLoadProducer";
-            this.toolStripButtonLoadProducer.Size = new System.Drawing.Size(65, 22);
-            this.toolStripButtonLoadProducer.Text = "Загрузить";
-            this.toolStripButtonLoadProducer.Click += new System.EventHandler(this.toolStripButtonLoadProducer_Click);
-            // 
-            // toolStripButtonAddProducer
-            // 
-            this.toolStripButtonAddProducer.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButtonAddProducer.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonAddProducer.Image")));
-            this.toolStripButtonAddProducer.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonAddProducer.Name = "toolStripButtonAddProducer";
-            this.toolStripButtonAddProducer.Size = new System.Drawing.Size(63, 22);
-            this.toolStripButtonAddProducer.Text = "Добавить";
-            this.toolStripButtonAddProducer.Click += new System.EventHandler(this.toolStripButtonAddProducer_Click);
-            // 
-            // toolStripButtonUpdateProducer
-            // 
-            this.toolStripButtonUpdateProducer.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButtonUpdateProducer.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonUpdateProducer.Image")));
-            this.toolStripButtonUpdateProducer.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonUpdateProducer.Name = "toolStripButtonUpdateProducer";
-            this.toolStripButtonUpdateProducer.Size = new System.Drawing.Size(65, 22);
-            this.toolStripButtonUpdateProducer.Text = "Обновить";
-            this.toolStripButtonUpdateProducer.Click += new System.EventHandler(this.toolStripButtonUpdateProducer_Click);
-            // 
-            // toolStripButtonDeleteProducer
-            // 
-            this.toolStripButtonDeleteProducer.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButtonDeleteProducer.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonDeleteProducer.Image")));
-            this.toolStripButtonDeleteProducer.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonDeleteProducer.Name = "toolStripButtonDeleteProducer";
-            this.toolStripButtonDeleteProducer.Size = new System.Drawing.Size(55, 22);
-            this.toolStripButtonDeleteProducer.Text = "Удалить";
-            this.toolStripButtonDeleteProducer.Click += new System.EventHandler(this.toolStripButtonDeleteProducer_Click);
-            // 
-            // listViewProducers
-            // 
-            this.listViewProducers.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeaderID,
-            this.columnHeaderFirstName,
-            this.columnHeaderSecondName});
-            this.listViewProducers.FullRowSelect = true;
-            this.listViewProducers.GridLines = true;
-            this.listViewProducers.HideSelection = false;
-            this.listViewProducers.Location = new System.Drawing.Point(12, 40);
-            this.listViewProducers.Name = "listViewProducers";
-            this.listViewProducers.Size = new System.Drawing.Size(673, 202);
-            this.listViewProducers.TabIndex = 1;
-            this.listViewProducers.UseCompatibleStateImageBehavior = false;
-            this.listViewProducers.View = System.Windows.Forms.View.Details;
-            // 
-            // columnHeaderID
-            // 
-            this.columnHeaderID.DisplayIndex = 2;
-            this.columnHeaderID.Text = "ID";
-            // 
-            // columnHeaderFirstName
-            // 
-            this.columnHeaderFirstName.DisplayIndex = 0;
-            this.columnHeaderFirstName.Text = "Имя";
-            this.columnHeaderFirstName.Width = 134;
-            // 
-            // columnHeaderSecondName
-            // 
-            this.columnHeaderSecondName.DisplayIndex = 1;
-            this.columnHeaderSecondName.Text = "Фамилия";
-            this.columnHeaderSecondName.Width = 127;
+            this.toolStripMenuItemOptions.Name = "toolStripMenuItemOptions";
+            this.toolStripMenuItemOptions.Size = new System.Drawing.Size(181, 22);
+            this.toolStripMenuItemOptions.Text = "Свойства";
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(713, 297);
+            this.ClientSize = new System.Drawing.Size(849, 500);
             this.Controls.Add(this.tabControlMain);
             this.Name = "FormMain";
             this.Text = "Фильмотека";
@@ -298,41 +269,45 @@
             this.tabControlMain.ResumeLayout(false);
             this.tabPageFilms.ResumeLayout(false);
             this.tabPageFilms.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCover)).EndInit();
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.filmBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dBdotNetDataSetBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dB_dotNetDataSet)).EndInit();
             this.tabPageProducers.ResumeLayout(false);
-            this.tabPageProducers.PerformLayout();
-            this.toolStrip2.ResumeLayout(false);
-            this.toolStrip2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.producerBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCover)).EndInit();
+            this.contextMenuStripPircturebox.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
         private System.Windows.Forms.TabPage tabPageFilms;
-        private System.Windows.Forms.ColumnHeader columnHeaderTitle;
-        private System.Windows.Forms.ColumnHeader columnHeaderProdusser;
-        private System.Windows.Forms.ColumnHeader columnHeaderYear;
         private System.Windows.Forms.TabPage tabPageProducers;
-        private System.Windows.Forms.ColumnHeader columnHeaderFirstName;
-        private System.Windows.Forms.ColumnHeader columnHeaderSecondName;
-        private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripButton toolStripButtonLoad;
-        private System.Windows.Forms.ToolStripButton toolStripButtonAdd;
-        private System.Windows.Forms.ToolStripButton toolStripButtonDelete;
-        private System.Windows.Forms.ToolStripButton toolStripButtonUpdate;
-        private System.Windows.Forms.ToolStrip toolStrip2;
-        private System.Windows.Forms.ToolStripButton toolStripButtonLoadProducer;
-        private System.Windows.Forms.ToolStripButton toolStripButtonAddProducer;
-        private System.Windows.Forms.ToolStripButton toolStripButtonUpdateProducer;
-        private System.Windows.Forms.ToolStripButton toolStripButtonDeleteProducer;
-        private System.Windows.Forms.ColumnHeader columnHeaderID;
-        private System.Windows.Forms.ColumnHeader columnHeaderFilmID;
         internal System.Windows.Forms.TabControl tabControlMain;
-        internal System.Windows.Forms.ListView listViewFilms;
-        public System.Windows.Forms.ListView listViewProducers;
+        private DB_dotNetDataSet dB_dotNetDataSet;
+        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.BindingSource dBdotNetDataSetBindingSource;
+        private System.Windows.Forms.BindingSource filmBindingSource;
+        private DB_dotNetDataSetTableAdapters.FilmTableAdapter filmTableAdapter;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.BindingSource producerBindingSource;
+        private DB_dotNetDataSetTableAdapters.ProducerTableAdapter producerTableAdapter;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn firstNameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn lastNameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.Label labelCover;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn titleDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn producerDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn yearDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewImageColumn coverDataGridViewImageColumn;
         private System.Windows.Forms.PictureBox pictureBoxCover;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripPircturebox;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemLoad;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemSave;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemOptions;
     }
 }
 
