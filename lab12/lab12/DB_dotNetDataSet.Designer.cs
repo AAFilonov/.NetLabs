@@ -509,10 +509,6 @@ namespace lab12 {
                 this.columnid.AllowDBNull = false;
                 this.columnid.ReadOnly = true;
                 this.columnid.Unique = true;
-                this.columnproducer.AllowDBNull = false;
-                this.columncover.AllowDBNull = false;
-                this.columnyear.AllowDBNull = false;
-                this.columnTitle.AllowDBNull = false;
                 this.columnTitle.MaxLength = 100;
             }
             
@@ -979,7 +975,12 @@ namespace lab12 {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public int producer {
                 get {
-                    return ((int)(this[this.tableFilm.producerColumn]));
+                    try {
+                        return ((int)(this[this.tableFilm.producerColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Значение для столбца \'producer\' в таблице \'Film\' равно DBNull.", e);
+                    }
                 }
                 set {
                     this[this.tableFilm.producerColumn] = value;
@@ -990,7 +991,12 @@ namespace lab12 {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public byte[] cover {
                 get {
-                    return ((byte[])(this[this.tableFilm.coverColumn]));
+                    try {
+                        return ((byte[])(this[this.tableFilm.coverColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Значение для столбца \'cover\' в таблице \'Film\' равно DBNull.", e);
+                    }
                 }
                 set {
                     this[this.tableFilm.coverColumn] = value;
@@ -1001,7 +1007,12 @@ namespace lab12 {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public int year {
                 get {
-                    return ((int)(this[this.tableFilm.yearColumn]));
+                    try {
+                        return ((int)(this[this.tableFilm.yearColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Значение для столбца \'year\' в таблице \'Film\' равно DBNull.", e);
+                    }
                 }
                 set {
                     this[this.tableFilm.yearColumn] = value;
@@ -1012,7 +1023,12 @@ namespace lab12 {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public string Title {
                 get {
-                    return ((string)(this[this.tableFilm.TitleColumn]));
+                    try {
+                        return ((string)(this[this.tableFilm.TitleColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Значение для столбца \'Title\' в таблице \'Film\' равно DBNull.", e);
+                    }
                 }
                 set {
                     this[this.tableFilm.TitleColumn] = value;
@@ -1028,6 +1044,54 @@ namespace lab12 {
                 set {
                     this.SetParentRow(value, this.Table.ParentRelations["FK_Film_Producer"]);
                 }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsproducerNull() {
+                return this.IsNull(this.tableFilm.producerColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetproducerNull() {
+                this[this.tableFilm.producerColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IscoverNull() {
+                return this.IsNull(this.tableFilm.coverColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetcoverNull() {
+                this[this.tableFilm.coverColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsyearNull() {
+                return this.IsNull(this.tableFilm.yearColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetyearNull() {
+                this[this.tableFilm.yearColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsTitleNull() {
+                return this.IsNull(this.tableFilm.TitleColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetTitleNull() {
+                this[this.tableFilm.TitleColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -1319,12 +1383,14 @@ namespace lab12.DB_dotNetDataSetTableAdapters {
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[Film] WHERE (([id] = @Original_id) AND ([producer] = @Original" +
-                "_producer) AND ([year] = @Original_year) AND ([Title] = @Original_Title))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[Film] WHERE (([id] = @Original_id) AND ((@IsNull_producer = 1 AND [producer] IS NULL) OR ([producer] = @Original_producer)) AND ((@IsNull_year = 1 AND [year] IS NULL) OR ([year] = @Original_year)) AND ((@IsNull_Title = 1 AND [Title] IS NULL) OR ([Title] = @Original_Title)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_producer", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "producer", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_producer", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "producer", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_year", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "year", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_year", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "year", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Title", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Title", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Title", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Title", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
@@ -1338,7 +1404,7 @@ namespace lab12.DB_dotNetDataSetTableAdapters {
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Title", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Title", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[Film] SET [producer] = @producer, [cover] = @cover, [year] = @year, [Title] = @Title WHERE (([id] = @Original_id) AND ([producer] = @Original_producer) AND ([year] = @Original_year) AND ([Title] = @Original_Title));
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[Film] SET [producer] = @producer, [cover] = @cover, [year] = @year, [Title] = @Title WHERE (([id] = @Original_id) AND ((@IsNull_producer = 1 AND [producer] IS NULL) OR ([producer] = @Original_producer)) AND ((@IsNull_year = 1 AND [year] IS NULL) OR ([year] = @Original_year)) AND ((@IsNull_Title = 1 AND [Title] IS NULL) OR ([Title] = @Original_Title)));
 SELECT id, producer, cover, year, Title FROM Film WHERE (id = @id)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@producer", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "producer", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -1346,8 +1412,11 @@ SELECT id, producer, cover, year, Title FROM Film WHERE (id = @id)";
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@year", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "year", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Title", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Title", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_producer", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "producer", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_producer", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "producer", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_year", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "year", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_year", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "year", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Title", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Title", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Title", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Title", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
@@ -1426,15 +1495,31 @@ SELECT id, producer, cover, year, Title FROM Film WHERE (id = @id)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_id, int Original_producer, int Original_year, string Original_Title) {
+        public virtual int Delete(int Original_id, global::System.Nullable<int> Original_producer, global::System.Nullable<int> Original_year, string Original_Title) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_id));
-            this.Adapter.DeleteCommand.Parameters[1].Value = ((int)(Original_producer));
-            this.Adapter.DeleteCommand.Parameters[2].Value = ((int)(Original_year));
-            if ((Original_Title == null)) {
-                throw new global::System.ArgumentNullException("Original_Title");
+            if ((Original_producer.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[2].Value = ((int)(Original_producer.Value));
             }
             else {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((string)(Original_Title));
+                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            if ((Original_year.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[4].Value = ((int)(Original_year.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            if ((Original_Title == null)) {
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[6].Value = ((string)(Original_Title));
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -1456,17 +1541,27 @@ SELECT id, producer, cover, year, Title FROM Film WHERE (id = @id)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(int producer, byte[] cover, int year, string Title) {
-            this.Adapter.InsertCommand.Parameters[0].Value = ((int)(producer));
+        public virtual int Insert(global::System.Nullable<int> producer, byte[] cover, global::System.Nullable<int> year, string Title) {
+            if ((producer.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[0].Value = ((int)(producer.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
             if ((cover == null)) {
-                throw new global::System.ArgumentNullException("cover");
+                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.InsertCommand.Parameters[1].Value = ((byte[])(cover));
             }
-            this.Adapter.InsertCommand.Parameters[2].Value = ((int)(year));
+            if ((year.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[2].Value = ((int)(year.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
             if ((Title == null)) {
-                throw new global::System.ArgumentNullException("Title");
+                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.InsertCommand.Parameters[3].Value = ((string)(Title));
@@ -1491,31 +1586,57 @@ SELECT id, producer, cover, year, Title FROM Film WHERE (id = @id)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(int producer, byte[] cover, int year, string Title, int Original_id, int Original_producer, int Original_year, string Original_Title, int id) {
-            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(producer));
+        public virtual int Update(global::System.Nullable<int> producer, byte[] cover, global::System.Nullable<int> year, string Title, int Original_id, global::System.Nullable<int> Original_producer, global::System.Nullable<int> Original_year, string Original_Title, int id) {
+            if ((producer.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(producer.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
             if ((cover == null)) {
-                throw new global::System.ArgumentNullException("cover");
+                this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[1].Value = ((byte[])(cover));
             }
-            this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(year));
+            if ((year.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(year.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
             if ((Title == null)) {
-                throw new global::System.ArgumentNullException("Title");
+                this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(Title));
             }
             this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(Original_id));
-            this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(Original_producer));
-            this.Adapter.UpdateCommand.Parameters[6].Value = ((int)(Original_year));
-            if ((Original_Title == null)) {
-                throw new global::System.ArgumentNullException("Original_Title");
+            if ((Original_producer.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[5].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((int)(Original_producer.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((string)(Original_Title));
+                this.Adapter.UpdateCommand.Parameters[5].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[8].Value = ((int)(id));
+            if ((Original_year.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((int)(Original_year.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
+            }
+            if ((Original_Title == null)) {
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[10].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((string)(Original_Title));
+            }
+            this.Adapter.UpdateCommand.Parameters[11].Value = ((int)(id));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -1536,7 +1657,7 @@ SELECT id, producer, cover, year, Title FROM Film WHERE (id = @id)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(int producer, byte[] cover, int year, string Title, int Original_id, int Original_producer, int Original_year, string Original_Title) {
+        public virtual int Update(global::System.Nullable<int> producer, byte[] cover, global::System.Nullable<int> year, string Title, int Original_id, global::System.Nullable<int> Original_producer, global::System.Nullable<int> Original_year, string Original_Title) {
             return this.Update(producer, cover, year, Title, Original_id, Original_producer, Original_year, Original_Title, Original_id);
         }
     }
