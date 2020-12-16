@@ -25,5 +25,48 @@ namespace lab12
             this.producerTableAdapter.Fill(this.dB_dotNetDataSet.Producer);
 
         }
+
+        private void addToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            filmBindingSource.RemoveCurrent();
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            producerTableAdapter.Update(dB_dotNetDataSet.Producer);
+            filmTableAdapter.Update(dB_dotNetDataSet.Film);
+        }
+
+        private void printToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void buttonSave_Click(object sender, EventArgs e)
+        {
+            this.Validate();
+            this.filmBindingSource.EndEdit();
+            this.filmTableAdapter.Update(dB_dotNetDataSet.Film);
+        }
+
+        private void loadFilmsTableToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.filmTableAdapter.Fill(dB_dotNetDataSet.Film);
+        }
+
+        private void loadProducersTableToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.producerTableAdapter.Fill(dB_dotNetDataSet.Producer);
+        }
     }
 }
