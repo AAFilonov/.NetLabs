@@ -9,11 +9,78 @@
     <Window.Resources>
         <local:DB_dotNetDataSet x:Key="dB_dotNetDataSet"/>
         <CollectionViewSource x:Key="producerViewSource" Source="{Binding Producer, Source={StaticResource dB_dotNetDataSet}}"/>
+        <CollectionViewSource x:Key="filmViewSource" Source="{Binding Film, Source={StaticResource dB_dotNetDataSet}}"/>
     </Window.Resources>
     <Grid>
-        <TabControl HorizontalAlignment="Left" Height="399" Margin="10,10,0,0" VerticalAlignment="Top" Width="772">
+
+        <TabControl Margin="10">
             <TabItem Header="film">
-                <Grid Background="#FFE5E5E5"/>
+                <Grid  DataContext="{StaticResource filmViewSource}">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition  Width="auto"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column ="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition  Height="Auto"></RowDefinition>
+                            <RowDefinition  Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+
+
+                        <Button x:Name="SaveUser" Grid.Row="0" Content="Сохранить" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="75" Click="SaveFilm_Click"/>
+                        <Button x:Name="DeleteUser"  Grid.Row="0" Content="Удалить" HorizontalAlignment="Left" Margin="100,0,0,0" VerticalAlignment="Top" Width="75" Click="DeleteFilm_Click"/>
+                        <DataGrid x:Name="filmDataGrid"  Grid.Row="1"  AutoGenerateColumns="False" EnableRowVirtualization="True" 
+                              ItemsSource="{Binding}" Margin="10,0" RowDetailsVisibilityMode="VisibleWhenSelected" RenderTransformOrigin="0.5,0.5" >
+                            <DataGrid.Columns>
+                                <DataGridTextColumn x:Name="idColumn1" Binding="{Binding id}" Header="id" IsReadOnly="True" Width="SizeToHeader"/>
+                                <DataGridTextColumn x:Name="titleColumn" Binding="{Binding Title}" Header="Title" Width="*"/>
+                                <DataGridTemplateColumn x:Name="producerColumn" Header="producer" Width="*">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <ComboBox>
+                                                <ComboBoxItem Content="{Binding producer}"/>
+                                                
+                                            </ComboBox>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTextColumn x:Name="yearColumn" Binding="{Binding year}" Header="year" Width="0.4*"/>
+
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+
+                    <Grid Grid.Column ="1" HorizontalAlignment="Center">
+                        <Grid.RowDefinitions>
+                            <RowDefinition  Height="auto"></RowDefinition>
+                            <RowDefinition  Height="*"></RowDefinition>
+
+                        </Grid.RowDefinitions>
+                        <Border MaxWidth="400"  Grid.Row="1" VerticalAlignment="Top">
+                            <Image x:Name="coverImage" Source="{Binding cover}">
+                                <Image.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="LoadFromFile" Click="LoadImage_OnClick"/>
+                                    </ContextMenu>
+                                </Image.ContextMenu>
+                            </Image> 
+
+                           
+
+                        </Border>
+                        
+                        <Label Content="cover:"    Grid.Row="0"/>
+
+
+                    </Grid>
+
+
+
+
+
+
+                </Grid>
             </TabItem>
             <TabItem Header="producer">
                 <Grid Background="#FFE5E5E5" DataContext="{StaticResource producerViewSource}">
@@ -24,12 +91,11 @@
                             <DataGridTextColumn x:Name="idColumn" Binding="{Binding id}" Header="id" IsReadOnly="True" Width="SizeToHeader"/>
                             <DataGridTextColumn x:Name="firstNameColumn" Binding="{Binding FirstName}" Header="First Name" Width="SizeToHeader"/>
                             <DataGridTextColumn x:Name="lastNameColumn" Binding="{Binding LastName}" Header="Last Name" Width="Auto"/>
-                          
+
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
             </TabItem>
         </TabControl>
-
     </Grid>
 </Window>
