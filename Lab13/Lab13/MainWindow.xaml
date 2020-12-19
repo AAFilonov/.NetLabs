@@ -31,20 +31,19 @@
                         <Button x:Name="SaveUser" Grid.Row="0" Content="Сохранить" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="75" Click="SaveFilm_Click"/>
                         <Button x:Name="DeleteUser"  Grid.Row="0" Content="Удалить" HorizontalAlignment="Left" Margin="100,0,0,0" VerticalAlignment="Top" Width="75" Click="DeleteFilm_Click"/>
                         <DataGrid x:Name="filmDataGrid"  Grid.Row="1"  AutoGenerateColumns="False" EnableRowVirtualization="True" 
-                              ItemsSource="{Binding}" Margin="10,0" RowDetailsVisibilityMode="VisibleWhenSelected" RenderTransformOrigin="0.5,0.5" >
+                              ItemsSource="{Binding}" Margin="10,0" RowDetailsVisibilityMode="VisibleWhenSelected" RenderTransformOrigin="0.5,0.5"  >
                             <DataGrid.Columns>
                                 <DataGridTextColumn x:Name="idColumn1" Binding="{Binding id}" Header="id" IsReadOnly="True" Width="SizeToHeader"/>
                                 <DataGridTextColumn x:Name="titleColumn" Binding="{Binding Title}" Header="Title" Width="*"/>
-                                <DataGridTemplateColumn x:Name="producerColumn" Header="producer" Width="*">
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <ComboBox>
-                                                <ComboBoxItem Content="{Binding producer}"/>
-                                                
-                                            </ComboBox>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
+
+                                <local:DataGridComboBoxColumnWithBindingHack 
+                                   Header="producerID" Width="0.5*"
+                                    ItemsSource="{Binding DataContext.Producers, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" 
+                                    SelectedValueBinding="{Binding producer}"
+                                    SelectedValuePath="Id"
+                                    DisplayMemberPath="FullName"/>            
+
+
                                 <DataGridTextColumn x:Name="yearColumn" Binding="{Binding year}" Header="year" Width="0.4*"/>
 
                             </DataGrid.Columns>
@@ -57,7 +56,7 @@
                             <RowDefinition  Height="*"></RowDefinition>
 
                         </Grid.RowDefinitions>
-                        <Border MaxWidth="400"  Grid.Row="1" VerticalAlignment="Top">
+                        <Border MinWidth="200" MaxWidth="400"  Grid.Row="1" VerticalAlignment="Top">
                             <Image x:Name="coverImage" Source="{Binding cover}">
                                 <Image.ContextMenu>
                                     <ContextMenu>
@@ -69,8 +68,15 @@
                            
 
                         </Border>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="Cover Image:"    Grid.Column="0"/>
+                            <Button  Content="Set image"    Grid.Column="1" Click="LoadImage_OnClick"/>
+                        </Grid>
                         
-                        <Label Content="cover:"    Grid.Row="0"/>
 
 
                     </Grid>

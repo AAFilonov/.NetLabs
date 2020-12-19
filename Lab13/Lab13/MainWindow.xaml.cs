@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
@@ -13,10 +14,13 @@ namespace Lab13
 {
     public partial class MainWindow : Window
     {
-       private DB_dotNetDataSet dB_dotNetDataSet;
+
+
+        private DB_dotNetDataSet dB_dotNetDataSet;
        private DB_dotNetDataSetTableAdapters.FilmTableAdapter dB_dotNetDataSetFilmTableAdapter;
        private DB_dotNetDataSetTableAdapters.ProducerTableAdapter dB_dotNetDataSetProducerTableAdapter;
-        ConstraintCollection producers_dt;
+        ObservableCollection<Producer> _producers;
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             dB_dotNetDataSet = (DB_dotNetDataSet)FindResource("dB_dotNetDataSet");
@@ -31,25 +35,67 @@ namespace Lab13
             dB_dotNetDataSetFilmTableAdapter.Fill(dB_dotNetDataSet.Film);
             System.Windows.Data.CollectionViewSource filmViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("filmViewSource")));
             filmViewSource.View.MoveCurrentToFirst();
-            DB_dotNetDataSet.ProducerDataTable dt_producers = new DB_dotNetDataSet.ProducerDataTable();
+
+            _producers = new ObservableCollection<Producer>();
+
+            foreach (DataRow dr in dB_dotNetDataSet.Producer.Rows)
+            {
+
+                var tmp = new Producer()
+                {
+                    Id  = (int)dr.ItemArray[0],
+                    FirstName = (string)dr.ItemArray[1],
+                    LastName = (string)dr.ItemArray[2],
+                    FullName= (string)dr.ItemArray[3]
+                };
+               
+                _producers.Add(tmp);
+
+            }
+            this.DataContext = new ViewModel(_producers);
+
         }
 
-       
+
+        private void producerID_Changed(object sender, EventArgs e)
+        {
+            var tmp = (TextBox)sender;
+            try
+            {
+                var value = Convert.ToInt32(tmp.Text);
+
+                DB_dotNetDataSet.ProducerDataTable dt_producers = new DB_dotNetDataSet.ProducerDataTable();
+                dB_dotNetDataSetProducerTableAdapter.Fill(dt_producers);
+                var ds = dt_producers.Rows;
+                bool is_valid = false;
+                foreach (DataRow dr in ds)
+                {
+                    if (value == (int)dr.ItemArray[0])
+                        is_valid = true;
+                    
+                }
+                if (!is_valid)
+                {
+                    throw new Exception("Введенный id некорректен");
+                }
+            
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
         public MainWindow()
         {
             InitializeComponent();
             // получаем строку подключения из app.config
-
-           
-        
+         
 
         }
-        struct Producer
-        {
 
-            public string FullName;
-            public int id;
-        }
+
 
         private void DeleteProducer_Click(object sender, RoutedEventArgs e)
         {
@@ -68,6 +114,25 @@ namespace Lab13
         private void SaveProducer_Click(object sender, RoutedEventArgs e)
         {
             dB_dotNetDataSetProducerTableAdapter.Update(dB_dotNetDataSet.Producer);
+            var tmp = ((ViewModel)DataContext);
+            tmp.Producers.Clear();
+        
+            foreach (DataRow dr in dB_dotNetDataSet.Producer.Rows)
+            {
+
+                var t = new Producer()
+                {
+                    Id = (int)dr.ItemArray[0],
+                    FirstName = (string)dr.ItemArray[1],
+                    LastName = (string)dr.ItemArray[2],
+                    FullName = (string)dr.ItemArray[3]
+                };
+
+                tmp.Producers.Add(t);
+
+            }
+
+            DataContext = tmp;
         }
 
         private void DeleteFilm_Click(object sender, RoutedEventArgs e)
