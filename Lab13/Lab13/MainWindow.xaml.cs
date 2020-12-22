@@ -14,7 +14,13 @@ namespace Lab13
 {
     public partial class MainWindow : Window
     {
+        public MainWindow( )
+        {
+            InitializeComponent();
+            // получаем строку подключения из app.config
 
+
+        }
 
         private DB_dotNetDataSet dB_dotNetDataSet;
        private DB_dotNetDataSetTableAdapters.FilmTableAdapter dB_dotNetDataSetFilmTableAdapter;
@@ -87,13 +93,7 @@ namespace Lab13
             }
         }
 
-        public MainWindow()
-        {
-            InitializeComponent();
-            // получаем строку подключения из app.config
-         
-
-        }
+        
 
 
 
