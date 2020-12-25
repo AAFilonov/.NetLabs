@@ -42,14 +42,14 @@ function reloadProducerList() {
 }
 $(document).ready(function () {
 	reloadProducerList();
-	var producersList = $("#ProducersList");
+	var producersList = $("#ProducerInfo");
 	if (producersList.length) { //Есть элемент для информации о пользователе -  загрузить информацию о нём
 		var url_string = window.location.href;
 		var url = new URL(url_string);
 		var id = url.searchParams.get("id");
 		if (id != null) {
 			$.ajax({
-				url: usersUrl + id + "/",
+				url: producersUrl + id + "/",
 				dataType: "json",
 				data: null,
 				type: "GET",
@@ -74,7 +74,7 @@ $(document).ready(function () {
 		var id = $(this).attr("data-id");
 		if (id != null) {
 			$.ajax({
-				url: usersUrl + id + "/",
+				url: producersUrl + id + "/",
 				dataType: "json",
 				data: null,
 				type: "DELETE",
@@ -120,8 +120,11 @@ $(document).ready(function () {
 				type: "PUT",
 				success: function () {
 					window.location.href = "../Producers/index.html";
-
-				}
+		
+				},
+				error: function () {
+					alert("put failed");
+                }
 			});
 		}
 	});
