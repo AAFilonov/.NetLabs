@@ -108,9 +108,10 @@ $(document).ready(function () {
 		var id = url.searchParams.get("id");
 		if (id != null) {
 			var userData = {
-				UserId: id,
+				id: id,
 				LastName: $("#LastName").val(),
 				FirstName: $("#FirstName").val(),
+				FullName: $("#FirstName").val()+" "+$("#LastName").val()
 			
 			};
 			$.ajax({
