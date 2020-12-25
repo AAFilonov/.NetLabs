@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace Lab15
 {
@@ -11,6 +12,8 @@ namespace Lab15
         public static void Register(HttpConfiguration config)
         {
             // Конфигурация и службы веб-API
+            var cors = new EnableCorsAttribute("*", "*", "*");
+            config.EnableCors(cors);
 
             // Маршруты веб-API
             config.MapHttpAttributeRoutes();
@@ -22,7 +25,7 @@ namespace Lab15
             );
             config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
             config.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
-
         }
     }
+
 }
