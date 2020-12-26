@@ -23,7 +23,7 @@ function reloadProducerList() {
 					var fullName = item.FullName;
 				
 					html += "<tr><td>" +  fullName + "</td>";
-					html += "<td><a href='edit.html?id=" + userId + "'>Редактировать</a>&nbsp;<a href='#' class='delete_user' data-id='" + userId + "'>Удалить</a></td></tr>";
+					html += "<td><a href='edit.html?id=" + userId + "'>Редактировать</a>&nbsp;<a href='#' class='delete_producer' data-id='" + userId + "'>Удалить</a></td></tr>";
 				}
 				html += "</table>";
 				producersList.html(html);
@@ -70,7 +70,7 @@ $(document).ready(function () {
 	};
 
 
-	$(document).on("click", "a.delete_producer", function () {
+	$(document).on("click", ".delete_producer", function () {
 		var id = $(this).attr("data-id");
 		if (id != null) {
 			$.ajax({
