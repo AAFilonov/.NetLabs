@@ -140,4 +140,71 @@ $(document).ready(function () {
 
 	reloadFilmsList();
 	loadFilmInfo();
+
+
+	$(document).on("click", ".delete_film", function () {
+		var id = $(this).attr("data-id");
+		if (id != null) {
+			$.ajax({
+				url: filmsUrl + id + "/",
+				dataType: "json",
+				data: null,
+				type: "DELETE",
+				success: function (data) {
+					reloadFilmsList();
+				}
+			});
+		}
+	});
+
+	$(document).on("click", "#CreateProducer", function () {
+		var filmData = {
+			Title: $("#Title").val(),
+			year: $("#Year").val(),
+			producerId: $("#SelectProducer").val(),
+			cover:""
+			
+	
+
+		};
+		$.ajax({
+			url: filmsUrl,
+			dataType: "json",
+			data: filmData,
+			type: "POST",
+			success: function () {
+				window.location.href = "../Films/index.html";
+			}
+		});
+	});
+
+	$(document).on("click", "#EditProducer", function () {
+		var url_string = window.location.href;
+		var url = new URL(url_string);
+		var id = url.searchParams.get("id");
+		if (id != null) {
+			var userData = {
+				id: id,
+				Title: $("#Title").val(),
+				year: $("#Year").val(),
+				producerId: $("#SelectProducer").val(),
+				cover: ""
+
+			};
+			$.ajax({
+				url: filmsUrl + id + "/",
+				dataType: "json",
+				data: userData,
+				type: "PUT",
+				success: function () {
+					window.location.href = "../Films/index.html";
+
+				},
+				error: function () {
+					alert("put failed");
+				}
+			});
+		}
+	});
+
 })
