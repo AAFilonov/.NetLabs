@@ -23,7 +23,10 @@ function LoadFilms(data, filmsList) {
 		var Title = item.Title;
 		var Year = item.year;
 		var cover = item.cover;
-		var Producer = item.Producer1.FullName;
+		if (item.Producer1 != null)
+			var Producer = item.Producer1.FullName;
+		else
+			var Producer = "null";
 
 		
 		html += "<tr>";
@@ -46,11 +49,12 @@ function LoadFilm(data, filminfo) {
 	var Title = item.Title;
 	var Year = item.year;
 	var cover = item.cover;
-	var ProducerId = item.Producer1.id;
+	var ProducerId = item.producer;
 
 	$("#Title").val(Title);
 	$("#Year").val(Year);
-	$("#SelectProducer").val(ProducerId);
+	//$("#SelectProducer").val(ProducerId);
+	document.getElementById("SelectProducer").value = ProducerId;
 	$("#coverImg").prop("src", "data:image/png;base64,"+cover);
 }
 
@@ -64,10 +68,11 @@ function reloadFilmsList() {
 			type: "GET",
 
 			success: function (data) {
-
+			
 				LoadFilms(data, filmsList);
 			},
 			error: function (xhr, status, error) {
+				
 				var errorMessage = xhr.status + ': ' + xhr.statusText
 				alert('Error - ' + errorMessage);
 			}
@@ -95,7 +100,8 @@ function loadFilmInfo(){
 			});
 			filminfo.after("<input type='button' id='EditFilm' value='Сохранить'/>");
 		}
-		else {
+		else {	
+			$("#Year").val(2020);
 			filminfo.after("<input type='button' id='CreateFilm' value='Создать'/>");
 		}
 	};
@@ -134,13 +140,9 @@ function LoadSelectOptions() {
 }
 
 $(document).ready(function () {
-
-	
 	LoadSelectOptions();
-
 	reloadFilmsList();
 	loadFilmInfo();
-
 
 	$(document).on("click", ".delete_film", function () {
 		var id = $(this).attr("data-id");
@@ -156,55 +158,139 @@ $(document).ready(function () {
 			});
 		}
 	});
+	var fileinput = document.getElementById('fileinput');
+	if (fileinput != null) {
+		function handleFileSelect(evt) {
+			var f = evt.target.files[0]; // FileList object
+			if (f == undefined) return;
+			// Loop through the FileList and render image files as thumbnails.
 
-	$(document).on("click", "#CreateProducer", function () {
-		var filmData = {
-			Title: $("#Title").val(),
-			year: $("#Year").val(),
-			producerId: $("#SelectProducer").val(),
-			cover:""
+
+			var reader = new FileReader();
+
+			// Closure to capture the file information.
+			reader.onload = (function (theFile) {
+				return function (e) {
+					// Render thumbnail.
+
+					$("#coverImg").prop("src", e.target.result);
+
+				};
+			})(f);
+
+			// Read in the image file as a data URL.
+			reader.readAsDataURL(f);
+		}
+		fileinput.addEventListener('change', handleFileSelect, false);
+
+		var evt = document.createEvent("HTMLEvents");
+		evt.initEvent("change", false, true);
+		fileinput.dispatchEvent(evt);
+	}
+
+	function readFile(file, onLoadCallback) {
+		var reader = new FileReader();
+		reader.onload = onLoadCallback;
+		reader.readAsArrayBuffer(file);
+
+	}
+
+
+	$(document).on("click", "#CreateFilm", function () {
+
+		var files = $("#fileinput").prop("files");
+		var f = files[0];
+		readFile(f, function (e) {
+			// use result in callback...
 			
-	
 
-		};
-		$.ajax({
-			url: filmsUrl,
-			dataType: "json",
-			data: filmData,
-			type: "POST",
-			success: function () {
-				window.location.href = "../Films/index.html";
+			//var cover = e.target.result;
+			var coverUint8 = new Uint8Array(e.target.result);		
+			var cover = btoa(coverUint8);
+		
+			var producer_Id = $("#SelectProducer").val();
+			if (producer_Id == undefined) {
+				alert("Режисер не был выбран!");
+			}
+			else {
+				var filmData = {
+					Title: $("#Title").val(),
+					year: $("#Year").val(),
+					producer: producer_Id,
+					cover: cover
+				};
+				$.ajax({
+					url: filmsUrl,
+					dataType: "json",
+					data: filmData,
+					type: "POST",
+					success: function () {
+						alert("put not failed");
+						window.location.href = "../Films/index.html";
+
+
+					},
+					error: function (xhr, status, error) {
+						alert("put failed");
+						
+					}
+				});
 			}
 		});
+
+
+	/* */
+
+
 	});
 
-	$(document).on("click", "#EditProducer", function () {
-		var url_string = window.location.href;
-		var url = new URL(url_string);
-		var id = url.searchParams.get("id");
-		if (id != null) {
-			var userData = {
-				id: id,
-				Title: $("#Title").val(),
-				year: $("#Year").val(),
-				producerId: $("#SelectProducer").val(),
-				cover: ""
+	
 
-			};
-			$.ajax({
-				url: filmsUrl + id + "/",
-				dataType: "json",
-				data: userData,
-				type: "PUT",
-				success: function () {
-					window.location.href = "../Films/index.html";
 
-				},
-				error: function () {
-					alert("put failed");
-				}
-			});
-		}
+
+
+	$(document).on("click", "#EditFilm", function () {
+
+		var files = $("#fileinput").prop("files");
+		var f = files[0];
+
+		readFile(f, function (e) {
+	
+			var cover = new Uint8Array(e.target.result);
+			alert(cover);
+
+			var producer_Id = $("#SelectProducer").val();
+			if (producer_Id == undefined) {
+				alert("Режисер не был выбран!");
+			}
+			else {
+				var filmData = {
+					Title: $("#Title").val(),
+					year: $("#Year").val(),
+					producerId: producer_Id,
+					cover: cover
+				};
+				$.ajax({
+					url: filmsUrl,
+					dataType: "json",
+					data: filmData,
+					type: "PUT",
+					success: function () {
+						alert("put not failed");
+						window.location.href = "../Films/index.html";
+
+
+					},
+					error: function (xhr, status, error) {
+						alert("put failed");
+
+					}
+				});
+			}
+		});
+
+		
+		
 	});
 
 })
