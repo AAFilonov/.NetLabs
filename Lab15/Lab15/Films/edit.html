@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Редактирование фильма</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+
+</head>
+<body>
+    <a href="index.html" id="AllFilms">
+      Фильмы
+    </a>
+    <div id="FilmInfo">
+        <p>Название:	<input type="text" id="Title" /></p>
+        <p>Год: <input type="number" min="1900" max="2020" value="2020" id="FirstName" /></p>
+        <select id="producer">
+            <option selected="selected">Выберете режисера</option>
+        </select>
+        <p>Имя: <input type="text" id="FirstName" /></p>
+        <img id="cover" style="min-height: 300px; width:auto; object-fit:fill;"/>
+        <button id="set_cover">Открыть</button>
+
+       
+    </div>
+    <script src="../Scripts/films.js"></script>
+</body>
+</html>

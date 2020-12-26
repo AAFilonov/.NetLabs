@@ -42,6 +42,8 @@ function reloadProducerList() {
 }
 $(document).ready(function () {
 	reloadProducerList();
+
+
 	var producersList = $("#ProducerInfo");
 	if (producersList.length) { //Есть элемент для информации о пользователе -  загрузить информацию о нём
 		var url_string = window.location.href;
