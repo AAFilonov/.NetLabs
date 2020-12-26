@@ -201,10 +201,6 @@ $(document).ready(function () {
 		var files = $("#fileinput").prop("files");
 		var f = files[0];
 		readFile(f, function (e) {
-			// use result in callback...
-			
-
-			//var cover = e.target.result;
 			var coverUint8 = new Uint8Array(e.target.result);		
 			var cover = btoa(coverUint8);
 		
@@ -237,10 +233,6 @@ $(document).ready(function () {
 				});
 			}
 		});
-
-
-	/* */
-
 
 	});
 
