@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>Редактирование фильма</title>
+    <link id="style" rel="stylesheet" type="text/css" href="../Content/Site.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 
 </head>
@@ -12,12 +13,12 @@
     </a>
     <div id="FilmInfo">
         <p>Название:	<input type="text" id="Title" /></p>
-        <p>Год: <input type="number" min="1900" max="2020" value="2020" id="FirstName" /></p>
-        <select id="producer">
+        <p>Год: <input id="Year" type="number" min="1900" max="2020"  /></p>
+        <select id="SelectProducer">
             <option selected="selected">Выберете режисера</option>
         </select>
-        <p>Имя: <input type="text" id="FirstName" /></p>
-        <img id="cover" style="min-height: 300px; width:auto; object-fit:fill;"/>
+       
+        <img id="coverImg" src=""/>
         <button id="set_cover">Открыть</button>
 
        

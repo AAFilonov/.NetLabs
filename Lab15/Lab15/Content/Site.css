@@ -20,7 +20,12 @@ th,td{
     padding: 4px;
 }
 #FilmsList img{
-    max-height:300px;
-    width: auto;
+    max-height: 300px;
+    width: 200px;
+    object-fit: fill;
+}
+#FilmsInfo img {
+    max-height: 300px;
+    width: 200px;
     object-fit: fill;
 }
