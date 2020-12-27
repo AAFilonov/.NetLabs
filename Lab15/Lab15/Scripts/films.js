@@ -191,7 +191,7 @@ $(document).ready(function () {
 	function readFile(file, onLoadCallback) {
 		var reader = new FileReader();
 		reader.onload = onLoadCallback;
-		reader.readAsArrayBuffer(file);
+		reader.readAsDataURL(file);
 
 	}
 
@@ -201,8 +201,12 @@ $(document).ready(function () {
 		var files = $("#fileinput").prop("files");
 		var f = files[0];
 		readFile(f, function (e) {
-			var coverUint8 = new Uint8Array(e.target.result);		
-			var cover = btoa(coverUint8);
+			
+			//var coverUint8 = new Uint8Array(e.target.result);		
+			//var cover = btoa(coverUint8);
+			
+			var cover = e.target.result;
+			cover = cover.replace('data:image/jpeg;base64,', '');
 		
 			var producer_Id = $("#SelectProducer").val();
 			if (producer_Id == undefined) {
@@ -215,22 +219,29 @@ $(document).ready(function () {
 					producer: producer_Id,
 					cover: cover
 				};
+				console.log(filmData.cover);
+
+
+				var url = filmsUrl;
+				var method = "POST";
 				$.ajax({
-					url: filmsUrl,
-					dataType: "json",
-					data: filmData,
-					type: "POST",
+					url, method,
+
+					data: JSON.stringify(filmData),
+					contentType: 'application/json',
 					success: function () {
-						alert("put not failed");
+					
+
 						window.location.href = "../Films/index.html";
 
 
 					},
 					error: function (xhr, status, error) {
 						alert("put failed");
-						
+
 					}
 				});
+				
 			}
 		});
 
@@ -242,42 +253,57 @@ $(document).ready(function () {
 
 
 	$(document).on("click", "#EditFilm", function () {
-
+		
 		var files = $("#fileinput").prop("files");
 		var f = files[0];
 
 		readFile(f, function (e) {
 	
-			var cover = new Uint8Array(e.target.result);
-			alert(cover);
 
+			//var coverUint8 = new Uint8Array(e.target.result);
+			//var cover = btoa(coverUint8);
+			
+			var cover = e.target.result;
+			//cover = cover.replace('\n,', '');
+			cover = cover.replace('data:image/jpeg;base64,', '');	
+		
+		
 			var producer_Id = $("#SelectProducer").val();
-			if (producer_Id == undefined) {
+			if (!producer_Id ) {
 				alert("Режисер не был выбран!");
 			}
 			else {
-				var filmData = {
-					Title: $("#Title").val(),
-					year: $("#Year").val(),
-					producerId: producer_Id,
-					cover: cover
-				};
-				$.ajax({
-					url: filmsUrl,
-					dataType: "json",
-					data: filmData,
-					type: "PUT",
-					success: function () {
-						alert("put not failed");
-						window.location.href = "../Films/index.html";
+				var url_string = window.location.href;
+				var url = new URL(url_string);
+				var id = url.searchParams.get("id");
+				if (id != null) {
+
+					var filmData = {
+						id:id,
+						Title: $("#Title").val(),
+						year: $("#Year").val(),
+						producerId: producer_Id,
+						cover: cover
+					};
+					var url = filmsUrl + id + "/";
+					var method = "PUT";
+					$.ajax({
+						url, method,
+						
+						data: JSON.stringify(filmData),
+						contentType: 'application/json',
+						success: function () {
+					
+							window.location.href = "../Films/index.html";
 
 
-					},
-					error: function (xhr, status, error) {
-						alert("put failed");
+						},
+						error: function (xhr, status, error) {
+							alert("put failed");
 
-					}
-				});
+						}
+					});
+				}
 			}
 		});
 
