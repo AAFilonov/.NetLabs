@@ -5,98 +5,55 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RGR"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded">
+    <Window.Resources>
+        <local:DB_AnimalsDataSet x:Key="dB_AnimalsDataSet"/>
+        <CollectionViewSource x:Key="animalViewSource" Source="{Binding Animal, Source={StaticResource dB_AnimalsDataSet}}"/>
+    </Window.Resources>
 
-        <TabControl Margin="10">
-            <TabItem Header="film">
-                <Grid  DataContext="{StaticResource filmViewSource}">
-
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                        <ColumnDefinition  Width="auto"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Grid Grid.Column ="0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition  Height="Auto"></RowDefinition>
-                            <RowDefinition  Height="Auto"></RowDefinition>
-                        </Grid.RowDefinitions>
-
-
-                        <Button x:Name="SaveUser" Grid.Row="0" Content="Сохранить" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="75" Click="SaveFilm_Click"/>
-                        <Button x:Name="DeleteUser"  Grid.Row="0" Content="Удалить" HorizontalAlignment="Left" Margin="100,0,0,0" VerticalAlignment="Top" Width="75" Click="DeleteFilm_Click"/>
-                        <DataGrid x:Name="filmDataGrid"  Grid.Row="1"  AutoGenerateColumns="False" EnableRowVirtualization="True" 
-                              ItemsSource="{Binding}" Margin="10,0" RowDetailsVisibilityMode="VisibleWhenSelected" RenderTransformOrigin="0.5,0.5"  >
-                            <DataGrid.Columns>
-                                <DataGridTextColumn x:Name="idColumn1" Binding="{Binding id}" Header="id" IsReadOnly="True" Width="SizeToHeader"/>
-                                <DataGridTextColumn x:Name="titleColumn" Binding="{Binding Title}" Header="Title" Width="*"/>
-
-                                <local:DataGridComboBoxColumnWithBindingHack 
-                                   Header="producerID" Width="0.5*"
-                                    ItemsSource="{Binding DataContext.Producers, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" 
-                                    SelectedValueBinding="{Binding producer}"
-                                    SelectedValuePath="Id"
-                                    DisplayMemberPath="FullName"/>
-
-
-                                <DataGridTextColumn x:Name="yearColumn" Binding="{Binding year}" Header="year" Width="0.4*"/>
-
-                            </DataGrid.Columns>
-                        </DataGrid>
-                    </Grid>
-
-                    <Grid Grid.Column ="1" HorizontalAlignment="Center">
-                        <Grid.RowDefinitions>
-                            <RowDefinition  Height="auto"></RowDefinition>
-                            <RowDefinition  Height="*"></RowDefinition>
-
-                        </Grid.RowDefinitions>
-                        <Border MinWidth="200" MaxWidth="400"  Grid.Row="1" VerticalAlignment="Top">
-                            <Image x:Name="coverImage" Source="{Binding cover}">
-                                <Image.ContextMenu>
-                                    <ContextMenu>
-                                        <MenuItem Header="LoadFromFile" Click="LoadImage_OnClick"/>
-                                    </ContextMenu>
-                                </Image.ContextMenu>
-                            </Image>
+    <Grid DataContext="{StaticResource animalViewSource}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        
+        <StackPanel Grid.Row="0" Grid.Column="0" Margin="4" Orientation="Horizontal">
+            <Button x:Name="Save" Padding="2" Click="Save_Click">Save animal</Button>
+            <Button x:Name="Delete" Padding="2" Height="22" VerticalAlignment="Top" Click="Delete_Click">Delete animal</Button>
+            <Button x:Name="Parse" Padding="2" Click="Parse_Click">Parse URL</Button>
+            <TextBox x:Name="fieldURL" Width="300"></TextBox>
+            
+            
+        </StackPanel>
+        
+        <DataGrid x:Name="animalDataGrid" Grid.Row="1" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="idColumn" Binding="{Binding id}" Header="id" IsReadOnly="True" Width="auto"/>
+                <DataGridTextColumn x:Name="name_RusColumn" Binding="{Binding Name_Rus}" Header="Name Rus" Width="*"/>
+                <DataGridTextColumn x:Name="name_LatinColumn" Binding="{Binding Name_Latin}" Header="Name Latin" Width="*"/>
+                <DataGridTextColumn x:Name="name_EngColumn" Binding="{Binding Name_Eng}" Header="Name Eng" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        
+       
+        <Label Content="Cover Image:"    Grid.Column="1" />
+        <Button  Content="Set image"    Grid.Column="1" Width="80" Click="LoadImage_OnClick"/>
+        <Border MinWidth="200" MaxWidth="400"  Grid.Column="1" Grid.Row="1" VerticalAlignment="Top">
+            <Image x:Name="coverImage" Source="{Binding photo}">
+                <Image.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="LoadFromFile" Click="LoadImage_OnClick"/>
+                    </ContextMenu>
+                </Image.ContextMenu>
+            </Image>
 
 
 
-                        </Border>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition></ColumnDefinition>
-                                <ColumnDefinition></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-                            <Label Content="Cover Image:"    Grid.Column="0"/>
-                            <Button  Content="Set image"    Grid.Column="1" Click="LoadImage_OnClick"/>
-                        </Grid>
+        </Border>
 
-
-
-                    </Grid>
-
-
-
-
-
-
-                </Grid>
-            </TabItem>
-            <TabItem Header="producer">
-                <Grid Background="#FFE5E5E5" DataContext="{StaticResource producerViewSource}">
-                    <Button x:Name="SaveComment" Content="Сохранить" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="SaveProducer_Click"/>
-                    <Button x:Name="DeleteComment" Content="Удалить" HorizontalAlignment="Left" Margin="90,10,0,0" VerticalAlignment="Top" Width="75" Click="DeleteProducer_Click" />
-                    <DataGrid x:Name="producerDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="10,36,10,10" RowDetailsVisibilityMode="VisibleWhenSelected">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn x:Name="idColumn" Binding="{Binding id}" Header="id" IsReadOnly="True" Width="SizeToHeader"/>
-                            <DataGridTextColumn x:Name="firstNameColumn" Binding="{Binding FirstName}" Header="First Name" Width="SizeToHeader"/>
-                            <DataGridTextColumn x:Name="lastNameColumn" Binding="{Binding LastName}" Header="Last Name" Width="Auto"/>
-
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </Grid>
-            </TabItem>
-        </TabControl>
     </Grid>
 </Window>

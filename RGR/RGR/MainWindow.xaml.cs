@@ -1,5 +1,9 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +16,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using HtmlAgilityPack;
+using System.Net;
 
 namespace RGR
 {
@@ -25,136 +31,162 @@ namespace RGR
             InitializeComponent();
         }
 
-        private DB_dotNetDataSet dB_dotNetDataSet;
-        private DB_dotNetDataSetTableAdapters.FilmTableAdapter dB_dotNetDataSetFilmTableAdapter;
-        private DB_dotNetDataSetTableAdapters.ProducerTableAdapter dB_dotNetDataSetProducerTableAdapter;
-        ObservableCollection<Producer> _producers;
+        private DB_AnimalsDataSet dB_AnimalsDataSet;
+        private DB_AnimalsDataSetTableAdapters.AnimalTableAdapter DB_AnimalsDataSetAnimalTableAdapter;
+
+
+     
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            dB_dotNetDataSet = (DB_dotNetDataSet)FindResource("dB_dotNetDataSet");
+            dB_AnimalsDataSet = (DB_AnimalsDataSet)FindResource("dB_AnimalsDataSet");
 
             // Загрузить данные в таблицу Producer. Можно изменить этот код как требуется.
-            dB_dotNetDataSetProducerTableAdapter = new Lab13.DB_dotNetDataSetTableAdapters.ProducerTableAdapter();
-            dB_dotNetDataSetProducerTableAdapter.Fill(dB_dotNetDataSet.Producer);
-            System.Windows.Data.CollectionViewSource producerViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("producerViewSource")));
-            producerViewSource.View.MoveCurrentToFirst();
-            // Загрузить данные в таблицу Film. Можно изменить этот код как требуется.
-            dB_dotNetDataSetFilmTableAdapter = new Lab13.DB_dotNetDataSetTableAdapters.FilmTableAdapter();
-            dB_dotNetDataSetFilmTableAdapter.Fill(dB_dotNetDataSet.Film);
-            System.Windows.Data.CollectionViewSource filmViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("filmViewSource")));
-            filmViewSource.View.MoveCurrentToFirst();
-
-            _producers = new ObservableCollection<Producer>();
-
-            foreach (DataRow dr in dB_dotNetDataSet.Producer.Rows)
-            {
-
-                var tmp = new Producer()
-                {
-                    Id = (int)dr.ItemArray[0],
-                    FirstName = (string)dr.ItemArray[1],
-                    LastName = (string)dr.ItemArray[2],
-                    FullName = (string)dr.ItemArray[3]
-                };
-
-                _producers.Add(tmp);
-
-            }
-            this.DataContext = new ViewModel(_producers);
-
-        }
-
-
-        private void producerID_Changed(object sender, EventArgs e)
-        {
-            var tmp = (TextBox)sender;
-            try
-            {
-                var value = Convert.ToInt32(tmp.Text);
-
-                DB_dotNetDataSet.ProducerDataTable dt_producers = new DB_dotNetDataSet.ProducerDataTable();
-                dB_dotNetDataSetProducerTableAdapter.Fill(dt_producers);
-                var ds = dt_producers.Rows;
-                bool is_valid = false;
-                foreach (DataRow dr in ds)
-                {
-                    if (value == (int)dr.ItemArray[0])
-                        is_valid = true;
-
-                }
-                if (!is_valid)
-                {
-                    throw new Exception("Введенный id некорректен");
-                }
-
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            DB_AnimalsDataSetAnimalTableAdapter = new RGR.DB_AnimalsDataSetTableAdapters.AnimalTableAdapter();
+            DB_AnimalsDataSetAnimalTableAdapter.Fill(dB_AnimalsDataSet.Animal);
+            System.Windows.Data.CollectionViewSource animalViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("animalViewSource")));
+            animalViewSource.View.MoveCurrentToFirst();
         }
 
 
 
 
 
-        private void DeleteProducer_Click(object sender, RoutedEventArgs e)
+
+        
+       
+
+        private void Window_Loaded_1(object sender, RoutedEventArgs e)
         {
-            for (int i = 0; i < producerDataGrid.SelectedItems.Count; i++)
+
+            RGR.DB_AnimalsDataSet dB_AnimalsDataSet = ((RGR.DB_AnimalsDataSet)(this.FindResource("dB_AnimalsDataSet")));
+            // Загрузить данные в таблицу Animal. Можно изменить этот код как требуется.
+            RGR.DB_AnimalsDataSetTableAdapters.AnimalTableAdapter dB_AnimalsDataSetAnimalTableAdapter = new RGR.DB_AnimalsDataSetTableAdapters.AnimalTableAdapter();
+            dB_AnimalsDataSetAnimalTableAdapter.Fill(dB_AnimalsDataSet.Animal);
+            System.Windows.Data.CollectionViewSource animalViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("animalViewSource")));
+            animalViewSource.View.MoveCurrentToFirst();
+        }
+
+        private void Save_Click(object sender, RoutedEventArgs e)
+        {
+            DB_AnimalsDataSetAnimalTableAdapter.Update(dB_AnimalsDataSet.Animal);
+        }
+
+        private void Delete_Click(object sender, RoutedEventArgs e)
+        {
+            for (int i = 0; i < animalDataGrid.SelectedItems.Count; i++)
             {
-                var dataRowView = producerDataGrid.SelectedItems[i] as DataRowView;
+                var dataRowView = animalDataGrid.SelectedItems[i] as DataRowView;
                 if (dataRowView != null)
                 {
                     DataRow dataRow = dataRowView.Row;
                     dataRow.Delete();
                 }
             }
-            dB_dotNetDataSetProducerTableAdapter.Update(dB_dotNetDataSet.Producer);
+            DB_AnimalsDataSetAnimalTableAdapter.Update(dB_AnimalsDataSet.Animal);
         }
 
-        private void SaveProducer_Click(object sender, RoutedEventArgs e)
+        private Image CreateImageByURL(string url)
         {
-            dB_dotNetDataSetProducerTableAdapter.Update(dB_dotNetDataSet.Producer);
-            var tmp = ((ViewModel)DataContext);
-            tmp.Producers.Clear();
-
-            foreach (DataRow dr in dB_dotNetDataSet.Producer.Rows)
+            var path = AppDomain.CurrentDomain.BaseDirectory + System.IO.Path.GetFileName(url);
+            using (WebClient client = new WebClient())
             {
-
-                var t = new Producer()
-                {
-                    Id = (int)dr.ItemArray[0],
-                    FirstName = (string)dr.ItemArray[1],
-                    LastName = (string)dr.ItemArray[2],
-                    FullName = (string)dr.ItemArray[3]
-                };
-
-                tmp.Producers.Add(t);
-
+                client.DownloadFile(new Uri(url), path);
             }
 
-            DataContext = tmp;
-        }
+            Image tmp = new Image();
 
-        private void DeleteFilm_Click(object sender, RoutedEventArgs e)
+            tmp.Source = new BitmapImage(new Uri(@"" + path));
+            return tmp;
+        }
+        public byte[] getJPGFromImageControl(BitmapImage imageC)
         {
-            for (int i = 0; i < filmDataGrid.SelectedItems.Count; i++)
+            MemoryStream memStream = new MemoryStream();
+            JpegBitmapEncoder encoder = new JpegBitmapEncoder();
+            encoder.Frames.Add(BitmapFrame.Create(imageC));
+            encoder.Save(memStream);
+            return memStream.ToArray();
+        }
+        private string GetTextName(HtmlNode p)
+        {
+            var variable = "";
+         
+           
+            foreach (var i in p.ChildNodes)
             {
-                var dataRowView = filmDataGrid.SelectedItems[i] as DataRowView;
-                if (dataRowView != null)
+                variable += i.InnerText;
+            }
+            variable = variable.Replace("\r\n", "");
+           
+            return variable;
+        }
+        bool checkExist(string ru_name)
+        {
+            foreach(DB_AnimalsDataSet.AnimalRow row in dB_AnimalsDataSet.Animal.Rows)
+            {
+                if (ru_name == row.Name_Rus) return true;
+            }
+            return false;
+        }
+        private void Parse_Click(object sender, RoutedEventArgs e)
+        {
+            var web = new HtmlWeb();
+            var htmlDoc = new HtmlDocument();
+            var siteurl = "https://www.moscowzoo.ru/";
+            var url = "https://www.moscowzoo.ru/animals/";
+            htmlDoc.LoadHtml(web.Load(url).Text);
+            var sp_list_xpath = "/html/body/div/section/div/div/div/ul[2]";
+            HtmlNode SpeciesListNode = htmlDoc.DocumentNode.SelectSingleNode(sp_list_xpath);
+            var count = 0;
+            if (SpeciesListNode != null)
+            {
+                HtmlNodeCollection ItemList = SpeciesListNode.ChildNodes;
+
+                foreach( var item in ItemList)
                 {
-                    DataRow dataRow = dataRowView.Row;
-                    dataRow.Delete();
+                    if (item.NodeType == HtmlAgilityPack.HtmlNodeType.Text) continue;
+                    var a_child = item.ChildNodes[1];
+
+                    var imgURL = (a_child.ChildNodes.Where(x => x.Name == "img").ToArray())[0].Attributes["src"].Value;
+                    var animal_photo = CreateImageByURL(siteurl + imgURL);
+
+
+
+                    var itemUrl = a_child.Attributes["href"].Value;//item.ChildNodes.First().Attributes["href"].Value;
+                    itemUrl = itemUrl.Replace("/animals/", "");
+               
+
+                    var animalPage = new HtmlDocument();
+                    animalPage.LoadHtml(web.Load(url+ itemUrl).Text);
+
+                
+                   var p_s = animalPage.DocumentNode.SelectNodes("//div[contains(@class, 'content-text')]//p");
+                   // var p_s = Animal_info_Node.ChildNodes.Where(x => x.Name == "p").ToArray();
+                    var rus_name = GetTextName(p_s[1]);
+                    var lat_name = GetTextName(p_s[2]);
+                    var eng_name = GetTextName(p_s[3]);
+                    rus_name = rus_name.Replace("Русское название – ", "");
+                    lat_name = lat_name.Replace("Латинское название – ", "");
+                    eng_name = eng_name.Replace("Английское название – ", "");
+
+
+                    if (!checkExist(rus_name))
+                    {
+                        var row = dB_AnimalsDataSet.Animal.NewAnimalRow();
+
+                        row.Name_Rus = rus_name;
+                        row.Name_Latin = lat_name;
+                        row.Name_Eng = eng_name;
+                        row.photo = getJPGFromImageControl(animal_photo.Source as BitmapImage);
+
+                        dB_AnimalsDataSet.Animal.Rows.Add(row);
+                       // count++;
+                       // if (count > 3) break;
+                    }
+
+
                 }
             }
-            dB_dotNetDataSetFilmTableAdapter.Update(dB_dotNetDataSet.Film);
-        }
-
-        private void SaveFilm_Click(object sender, RoutedEventArgs e)
-        {
-            dB_dotNetDataSetFilmTableAdapter.Update(dB_dotNetDataSet.Film);
         }
 
         private void LoadImage_OnClick(object sender, RoutedEventArgs e)
@@ -167,21 +199,20 @@ namespace RGR
             };
             if (openFileDialog.ShowDialog() == true)
             {
-                if (filmDataGrid.SelectedItems.Count > 0)
+                if (animalDataGrid.SelectedItems.Count > 0)
                 {
-                    var dataRowView = filmDataGrid.SelectedItems[0] as DataRowView;
+                    var dataRowView = animalDataGrid.SelectedItems[0] as DataRowView;
                     if (dataRowView != null)
                     {
-                        var dataRow = dataRowView.Row as DB_dotNetDataSet.FilmRow;
+                        var dataRow = dataRowView.Row as DB_AnimalsDataSet.AnimalRow;
                         if (dataRow != null)
                         {
-                            dataRow.cover = File.ReadAllBytes(openFileDialog.FileName);
+                            dataRow.photo = File.ReadAllBytes(openFileDialog.FileName);
                         }
                     }
                 }
             }
         }
-
     }
 }
-}
+
